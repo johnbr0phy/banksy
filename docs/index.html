@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Banksy Print Tracker - Upcoming Auctions</title>
+  <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+  <header>
+    <div class="header-inner">
+      <h1>Banksy Print Tracker</h1>
+      <p class="tagline">Tracking original Banksy print auctions worldwide</p>
+      <nav>
+        <a href="index.html" class="active">Upcoming Auctions</a>
+        <a href="completed.html">Completed Auctions</a>
+      </nav>
+    </div>
+  </header>
+
+  <main>
+    <div class="meta-bar">
+      <span id="last-updated">Loading...</span>
+      <span id="lot-count"></span>
+    </div>
+
+    <div id="auction-table-container">
+      <div class="loading" id="loading">Loading auction data...</div>
+      <div class="empty-state" id="empty-state" style="display:none;">
+        No upcoming auctions found. Check back soon.
+      </div>
+    </div>
+  </main>
+
+  <footer>
+    <p>&copy; 2026 Banksy Print Tracker. Data sourced from public auction listings.</p>
+  </footer>
+
+  <script src="js/app.js"></script>
+</body>
+</html>

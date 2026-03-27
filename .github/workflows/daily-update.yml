@@ -1,0 +1,49 @@
+name: Daily Scrape
+
+on:
+  schedule:
+    - cron: '0 6 * * *'  # 6am UTC daily
+  workflow_dispatch:  # allow manual trigger
+
+permissions:
+  contents: write
+
+jobs:
+  scrape:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+
+      - name: Install dependencies
+        run: |
+          pip install -r scraper/requirements.txt
+          playwright install chromium
+          playwright install-deps chromium
+
+      - name: Run scraper
+        env:
+          LIVEAUCTIONEERS_EMAIL: ${{ secrets.LIVEAUCTIONEERS_EMAIL }}
+          LIVEAUCTIONEERS_PASSWORD: ${{ secrets.LIVEAUCTIONEERS_PASSWORD }}
+          PHILLIPS_EMAIL: ${{ secrets.PHILLIPS_EMAIL }}
+          PHILLIPS_PASSWORD: ${{ secrets.PHILLIPS_PASSWORD }}
+          SOTHEBYS_EMAIL: ${{ secrets.SOTHEBYS_EMAIL }}
+          SOTHEBYS_PASSWORD: ${{ secrets.SOTHEBYS_PASSWORD }}
+          CHRISTIES_EMAIL: ${{ secrets.CHRISTIES_EMAIL }}
+          CHRISTIES_PASSWORD: ${{ secrets.CHRISTIES_PASSWORD }}
+        run: python scraper/scrape.py
+
+      - name: Commit and push if changed
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "github-actions[bot]@users.noreply.github.com"
+          git add data/upcoming.json
+          git diff --cached --quiet && echo "No changes to commit" && exit 0
+          git commit -m "Update upcoming auction data $(date -u +%Y-%m-%dT%H:%M:%SZ)"
+          git push
