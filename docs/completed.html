@@ -24,6 +24,24 @@
       <span id="lot-count"></span>
     </div>
 
+    <div class="filter-bar" id="filter-bar" style="display:none;">
+      <label class="filter-label" for="print-filter">Print name</label>
+      <div class="filter-controls">
+        <input
+          type="search"
+          id="print-filter"
+          class="filter-input"
+          placeholder="Filter by print name (e.g. Girl with Balloon)"
+          list="print-name-suggestions"
+          autocomplete="off"
+        />
+        <button type="button" id="print-filter-clear" class="filter-clear" hidden>
+          Clear
+        </button>
+      </div>
+      <datalist id="print-name-suggestions"></datalist>
+    </div>
+
     <div id="auction-table-container">
       <div class="loading" id="loading">Loading completed auction data...</div>
       <div class="empty-state" id="empty-state" style="display:none;">

@@ -10,6 +10,12 @@
     CNY: "\u00a5",
   };
 
+  var state = {
+    mode: "upcoming",
+    allLots: [],
+    filterQuery: "",
+  };
+
   function formatCurrency(amount, currency) {
     if (amount == null || isNaN(amount)) return "\u2014";
     var symbol = CURRENCY_SYMBOLS[currency] || currency + " ";
@@ -64,16 +70,51 @@
   }
 
   function pageMode() {
-    // completed.html sets data-mode="completed" on <body>
     var mode = document.body && document.body.getAttribute("data-mode");
     if (mode === "completed") return "completed";
     if (/completed\.html/i.test(window.location.pathname)) return "completed";
     return "upcoming";
   }
 
+  function normalizeName(name) {
+    return (name || "")
+      .toLowerCase()
+      .replace(/^banksy[\s,;:-]+/i, "")
+      .replace(/\s+/g, " ")
+      .trim();
+  }
+
+  function matchesPrintFilter(lot, query) {
+    if (!query) return true;
+    var q = query.toLowerCase().trim();
+    if (!q) return true;
+    var name = (lot.print_name || "").toLowerCase();
+    var normalized = normalizeName(lot.print_name);
+    return name.indexOf(q) !== -1 || normalized.indexOf(q) !== -1;
+  }
+
+  function uniquePrintNames(lots) {
+    var seen = {};
+    var names = [];
+    lots.forEach(function (lot) {
+      var raw = (lot.print_name || "").trim();
+      if (!raw) return;
+      // Prefer a cleaner display name for suggestions
+      var label = raw.replace(/^Banksy\s*[-–—:]\s*/i, "").trim() || raw;
+      var key = normalizeName(label);
+      if (!key || seen[key]) return;
+      seen[key] = true;
+      names.push(label);
+    });
+    names.sort(function (a, b) {
+      return a.localeCompare(b, undefined, { sensitivity: "base" });
+    });
+    return names;
+  }
+
   function buildTable(lots, grouped, mode) {
     var isCompleted = mode === "completed";
-    var colCount = isCompleted ? 6 : 6;
+    var colCount = 6;
     var html = '<table class="auction-table">';
     html +=
       "<thead><tr>" +
@@ -146,7 +187,7 @@
     }
 
     var midCol = isCompleted
-      ? "<td class=\"price-realised\">" + formatRealised(lot) + "</td>"
+      ? '<td class="price-realised">' + formatRealised(lot) + "</td>"
       : "<td>" + escapeHtml(lot.edition || "\u2014") + "</td>";
 
     return (
@@ -161,20 +202,92 @@
     );
   }
 
-  function render(data, mode) {
-    var loading = document.getElementById("loading");
+  function populateSuggestions(lots) {
+    var list = document.getElementById("print-name-suggestions");
+    if (!list) return;
+    var names = uniquePrintNames(lots);
+    list.innerHTML = names
+      .map(function (name) {
+        return "<option value=\"" + escapeHtml(name) + "\"></option>";
+      })
+      .join("");
+  }
+
+  function applyFilterAndRender() {
+    var mode = state.mode;
     var emptyState = document.getElementById("empty-state");
     var container = document.getElementById("auction-table-container");
-    var updatedEl = document.getElementById("last-updated");
     var countEl = document.getElementById("lot-count");
+    var clearBtn = document.getElementById("print-filter-clear");
+    var query = state.filterQuery;
 
-    if (loading) loading.style.display = "none";
-
-    if (updatedEl && data.last_updated) {
-      var d = new Date(data.last_updated);
-      updatedEl.textContent = "Last updated: " + d.toLocaleString();
+    if (clearBtn) {
+      clearBtn.hidden = !query;
     }
 
+    var lots = state.allLots.filter(function (lot) {
+      return matchesPrintFilter(lot, query);
+    });
+
+    if (countEl) {
+      if (query) {
+        countEl.textContent =
+          lots.length +
+          " of " +
+          state.allLots.length +
+          " lot" +
+          (state.allLots.length !== 1 ? "s" : "");
+      } else {
+        countEl.textContent =
+          lots.length + " lot" + (lots.length !== 1 ? "s" : "");
+      }
+    }
+
+    if (lots.length === 0) {
+      if (container) {
+        container.innerHTML =
+          '<div class="empty-state" id="empty-state">' +
+          (query
+            ? "No lots match \u201c" +
+              escapeHtml(query) +
+              "\u201d. Try another print name."
+            : mode === "completed"
+              ? "No completed auction results yet. Check back after the next scrape."
+              : "No upcoming auctions found. Check back soon.") +
+          "</div>";
+      }
+      if (emptyState) emptyState.style.display = "block";
+      return;
+    }
+
+    var grouped = lots.length > 8;
+    if (container) container.innerHTML = buildTable(lots, grouped, mode);
+  }
+
+  function setupFilter() {
+    var filterBar = document.getElementById("filter-bar");
+    var input = document.getElementById("print-filter");
+    var clearBtn = document.getElementById("print-filter-clear");
+    if (!input) return;
+
+    if (filterBar) filterBar.style.display = "flex";
+
+    input.addEventListener("input", function () {
+      state.filterQuery = input.value || "";
+      applyFilterAndRender();
+    });
+
+    if (clearBtn) {
+      clearBtn.addEventListener("click", function () {
+        input.value = "";
+        state.filterQuery = "";
+        applyFilterAndRender();
+        input.focus();
+      });
+    }
+  }
+
+  function prepareLots(data, mode) {
     var lots = (data.lots || []).filter(function (lot) {
       return lot.is_original !== false;
     });
@@ -193,18 +306,25 @@
       });
     }
 
-    if (lots.length === 0) {
-      if (emptyState) emptyState.style.display = "block";
-      return;
+    return lots;
+  }
+
+  function render(data, mode) {
+    var loading = document.getElementById("loading");
+    var updatedEl = document.getElementById("last-updated");
+
+    if (loading) loading.style.display = "none";
+
+    if (updatedEl && data.last_updated) {
+      var d = new Date(data.last_updated);
+      updatedEl.textContent = "Last updated: " + d.toLocaleString();
     }
 
-    if (countEl) {
-      countEl.textContent =
-        lots.length + " lot" + (lots.length !== 1 ? "s" : "");
-    }
-
-    var grouped = lots.length > 8;
-    if (container) container.innerHTML = buildTable(lots, grouped, mode);
+    state.mode = mode;
+    state.allLots = prepareLots(data, mode);
+    populateSuggestions(state.allLots);
+    setupFilter();
+    applyFilterAndRender();
   }
 
   function init() {
