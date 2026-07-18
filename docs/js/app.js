@@ -248,12 +248,112 @@
     return "upcoming";
   }
 
+  // Known titles used to recover a short name from catalogue dumps
+  var KNOWN_PRINTS = [
+    "girl with balloon", "girl and balloon", "love is in the bin", "flower thrower",
+    "laugh now", "pulp fiction", "jack and jill", "soup can", "kate moss",
+    "choose your weapon", "happy choppers", "morons", "bomb hugger", "bomb love",
+    "flag", "golf sale", "grin reaper", "napalm", "nola", "rude copper",
+    "sale ends", "toxic mary", "trolleys", "very little helps", "weston super mare",
+    "gangsta rat", "monkey queen", "donuts", "applause", "flying copper", "love rat",
+    "no ball games", "welcome to hell", "queen vic", "love is in the air",
+    "banksquiat", "barely legal", "cnd soldiers", "i fought the law",
+    "people who enjoy waving flags",
+  ];
+
+  var PRINT_ALIASES = {
+    "girl and balloon": "Girl with Balloon",
+    "girl with balloon": "Girl with Balloon",
+    "jack & jill": "Jack and Jill",
+    "queen victoria": "Queen Vic",
+  };
+
   function normalizeName(name) {
     return (name || "")
       .toLowerCase()
       .replace(/^banksy[\s,;:-]+/i, "")
       .replace(/\s+/g, " ")
       .trim();
+  }
+
+  function titleCasePrint(s) {
+    return (s || "")
+      .split(" ")
+      .map(function (w, i) {
+        if (!w) return w;
+        if (/^(a|an|and|of|the|on|in|with|from|to)$/i.test(w) && i > 0) {
+          return w.toLowerCase();
+        }
+        return w.charAt(0).toUpperCase() + w.slice(1);
+      })
+      .join(" ");
+  }
+
+  /**
+   * Strip catalogue noise so we show "Girl with Balloon" not a full lot blurb.
+   */
+  function cleanPrintName(raw) {
+    if (!raw) return "";
+    var text = String(raw).replace(/\s+/g, " ").trim();
+
+    text = text.replace(/^banksy\b\s*/i, "");
+    text = text.replace(/^\(\s*b\.?\s*\d{4}\s*\)\s*/i, "");
+    text = text.replace(/^\(\s*\d{4}\s*\)\s*/i, "");
+    text = text.replace(/^\([^)]*(?:born|british)[^)]*\)\s*/i, "");
+    text = text.replace(/^banksy\b\s*[-:–—]?\s*/i, "");
+    text = text.replace(/^[\s\-–—:,.]+|[\s\-–—:,.]+$/g, "");
+
+    var lower = text.toLowerCase();
+    var bestKey = null;
+    var bestLen = 0;
+    var i;
+
+    Object.keys(PRINT_ALIASES).forEach(function (alias) {
+      if (lower.indexOf(alias) !== -1 && alias.length > bestLen) {
+        bestKey = alias;
+        bestLen = alias.length;
+      }
+    });
+    for (i = 0; i < KNOWN_PRINTS.length; i++) {
+      var k = KNOWN_PRINTS[i];
+      if (lower.indexOf(k) !== -1 && k.length > bestLen) {
+        bestKey = k;
+        bestLen = k.length;
+      }
+    }
+
+    if (bestKey) {
+      var display =
+        PRINT_ALIASES[bestKey] ||
+        (bestKey === "girl with balloon" || bestKey === "girl and balloon"
+          ? "Girl with Balloon"
+          : titleCasePrint(bestKey));
+
+      var variantMatch = text.match(
+        /\(([^)]*(?:rain|grey|gray|sepia|silver|gold|pink|blue|green|white|black|emerald|tan|pow|colour|color)[^)]*)\)/i
+      );
+      if (!variantMatch) {
+        variantMatch = text.match(/\(([^)]*\/[^)]{1,30})\)/);
+      }
+      if (variantMatch) {
+        var inner = variantMatch[1].trim();
+        if (
+          !/(born|edition|cm|in\.|executed|painted|this work)/i.test(inner) &&
+          display.toLowerCase().indexOf(inner.toLowerCase()) === -1
+        ) {
+          return display + " (" + inner + ")";
+        }
+      }
+      return display;
+    }
+
+    // Cut at dimensions / medium
+    var cut = text.search(
+      /\s+\d+(?:\.\d+)?\s*[xX×]\s*\d+|\s+screenprint|\s+lithograph|\s+signed\b|\s+on\s+arches|\s+published\s+by|\s+\(this\s+work|\s+executed\s+in|\s+painted\s+in/i
+    );
+    if (cut > 0) text = text.slice(0, cut).replace(/[\s,;:.\-]+$/, "");
+    if (text.length > 72) text = text.slice(0, 72).replace(/\s+\S*$/, "");
+    return text || String(raw).slice(0, 60);
   }
 
   function matchesPrintFilter(lot, query) {
@@ -269,9 +369,8 @@
     var seen = {};
     var names = [];
     lots.forEach(function (lot) {
-      var raw = (lot.print_name || "").trim();
-      if (!raw) return;
-      var label = raw.replace(/^Banksy\s*[-–—:]\s*/i, "").trim() || raw;
+      var label = cleanPrintName(lot.print_name || "");
+      if (!label) return;
       var key = normalizeName(label);
       if (!key || seen[key]) return;
       seen[key] = true;
@@ -345,16 +444,19 @@
       imgHtml = '<div class="no-thumb">No img</div>';
     }
 
+    var displayName = cleanPrintName(lot.print_name) || lot.print_name || "";
     var nameHtml;
     if (lot.url) {
       nameHtml =
         '<a href="' +
         escapeHtml(lot.url) +
-        '" target="_blank" rel="noopener">' +
-        escapeHtml(lot.print_name) +
+        '" target="_blank" rel="noopener" title="' +
+        escapeHtml(lot.print_name || displayName) +
+        '">' +
+        escapeHtml(displayName) +
         "</a>";
     } else {
-      nameHtml = escapeHtml(lot.print_name);
+      nameHtml = escapeHtml(displayName);
     }
 
     var midCol = isCompleted
@@ -529,9 +631,16 @@
   }
 
   function prepareLots(data, mode) {
-    var lots = (data.lots || []).filter(function (lot) {
-      return lot.is_original !== false;
-    });
+    var lots = (data.lots || [])
+      .filter(function (lot) {
+        return lot.is_original !== false;
+      })
+      .map(function (lot) {
+        // Normalize in memory so filters/suggestions use clean names
+        var copy = Object.assign({}, lot);
+        copy.print_name = cleanPrintName(lot.print_name) || lot.print_name;
+        return copy;
+      });
 
     if (mode === "completed") {
       lots.sort(function (a, b) {

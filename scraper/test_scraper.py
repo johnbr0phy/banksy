@@ -8,6 +8,7 @@ import sys
 from scrape import (
     TRACKED_HOUSES,
     cards_to_lots,
+    clean_print_name,
     extract_title_from_lines,
     is_original_banksy_print,
     is_plausible,
@@ -111,6 +112,39 @@ def main() -> int:
     if {x["id"] for x in merged} != {"a", "b"}:
         print("FAIL merge upcoming")
         failed += 1
+
+    # Catalog dump → short print name
+    clean_cases = [
+        (
+            "BANKSY (B. 1975) Girl and Balloon 16 x 16 in (40.6 x 40.6 cm) "
+            "(Painted in 2003. This work is number 10 from an edition of 25)",
+            "Girl with Balloon",
+        ),
+        (
+            "Banksy (British, born 1974) Nola A/P (Grey Rain) Screenprint in colours, "
+            "2008, on Arches wove paper, signed and inscribed",
+            "Nola (Grey Rain)",
+        ),
+        ("Banksy - Happy Choppers", "Happy Choppers"),
+        (
+            "Banksy (British, born 1974) Soup Can (White/Emerald/Tan) Screenprint in colours",
+            "Soup Can (White/Emerald/Tan)",
+        ),
+        (
+            "BANKSY (B. 1975) People Who Enjoy Waving Flags Don't Deserve To Have One "
+            "(Executed in 2003, this work is unique.)",
+            "People Who Enjoy Waving Flags Don't Deserve To Have One",
+        ),
+    ]
+    print("=== Clean print name ===")
+    clean_failed = 0
+    for raw, expected in clean_cases:
+        got = clean_print_name(raw)
+        if got != expected:
+            print(f"  FAIL: {raw[:60]!r}... -> {got!r} (expected {expected!r})")
+            clean_failed += 1
+            failed += 1
+    print(f"  {len(clean_cases) - clean_failed}/{len(clean_cases)} passed\n")
 
     # Sotheby's wishlist UI puts "save" between artist and title
     sotheby_lines = ["Banksy", "save", "Trolleys (Color)", "Estimate", "30,000 USD - 50,000 USD"]

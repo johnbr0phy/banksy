@@ -134,6 +134,166 @@ def has_known_title(title: str) -> bool:
     return any(k in t for k in KNOWN_PRINTS)
 
 
+# Alias spellings → canonical known-print key (lowercase)
+PRINT_NAME_ALIASES = {
+    "girl and balloon": "girl with balloon",
+    "jack & jill": "jack and jill",
+    "love is in the air": "love is in the air",
+    "flower thrower triptych": "flower thrower",
+    "rage flower thrower": "flower thrower",
+    "sale ends v2": "sale ends",
+    "sale ends (v2)": "sale ends",
+    "sale ends v.2": "sale ends",
+    "queen victoria": "queen vic",
+    "lenin on rollerblades": "lenin",
+    "lenin on roller skates": "lenin",
+    "who put the revolution on ice": "lenin",
+}
+
+
+def _title_case_print(name: str) -> str:
+    """Title-case a print name, keeping short tokens like A/P, V2, POW."""
+    small = {"a", "an", "and", "of", "the", "on", "in", "with", "from", "to"}
+    parts = []
+    for i, word in enumerate(name.split()):
+        if re.match(r"^[A-Z0-9/&.+-]+$", word) and any(c.isalpha() for c in word):
+            # already acronym-ish
+            if len(word) <= 4 and word.upper() == word:
+                parts.append(word.upper() if word.isalpha() else word)
+                continue
+        lower = word.lower()
+        if i > 0 and lower in small:
+            parts.append(lower)
+        elif "/" in word or word.upper() in {"AP", "A/P", "POW", "LA", "V2", "BW"}:
+            parts.append(word.upper() if word.isalpha() else word)
+        else:
+            parts.append(word[:1].upper() + word[1:] if word else word)
+    return " ".join(parts)
+
+
+def clean_print_name(raw: str) -> str:
+    """
+    Reduce catalog dump titles to a short print name.
+
+    Examples:
+      "BANKSY (B. 1975) Girl and Balloon 16 x 16 in (40.6 x 40.6 cm) ..."
+        -> "Girl with Balloon"
+      "Banksy (British, born 1974) Nola A/P (Grey Rain) Screenprint ..."
+        -> "Nola (Grey Rain)"
+      "Banksy - Happy Choppers" -> "Happy Choppers"
+    """
+    if not raw:
+        return ""
+
+    # Work on a copy; keep original for variant extraction
+    original = " ".join(str(raw).split())
+    text = original
+
+    # 1) Drop artist credit prefixes
+    text = re.sub(r"(?i)^banksy\b\s*", "", text)
+    text = re.sub(r"(?i)^\(\s*b\.?\s*\d{4}\s*\)\s*", "", text)
+    text = re.sub(r"(?i)^\(\s*\d{4}\s*\)\s*", "", text)
+    text = re.sub(r"(?i)^\([^)]*(?:born|british)[^)]*\)\s*", "", text)
+    text = re.sub(r"(?i)^banksy\b\s*[-:–—]?\s*", "", text)
+    text = text.strip(" \t-:–—,.")
+
+    # 2) Prefer matching a known print title (or alias) anywhere in the string
+    haystack = text.lower()
+    best_key = None
+    best_len = 0
+    best_alias_span = None  # (start, end) in haystack for variant search nearby
+
+    for alias, canon in PRINT_NAME_ALIASES.items():
+        idx = haystack.find(alias)
+        if idx != -1 and len(alias) > best_len:
+            best_key = canon
+            best_len = len(alias)
+            best_alias_span = (idx, idx + len(alias))
+
+    for known in KNOWN_PRINTS:
+        idx = haystack.find(known)
+        if idx != -1 and len(known) > best_len:
+            best_key = known
+            best_len = len(known)
+            best_alias_span = (idx, idx + len(known))
+
+    canon_labels = {
+        "girl with balloon": "Girl with Balloon",
+        "queen vic": "Queen Vic",
+        "love is in the air": "Love Is in the Air",
+        "no ball games": "No Ball Games",
+        "i fought the law": "I Fought the Law",
+        "jack and jill": "Jack and Jill",
+        "sale ends": "Sale Ends",
+        "very little helps": "Very Little Helps",
+        "weston super mare": "Weston Super Mare",
+        "choose your weapon": "Choose Your Weapon",
+        "soup can": "Soup Can",
+        "nola": "Nola",
+        "happy choppers": "Happy Choppers",
+        "people who enjoy waving flags": (
+            "People Who Enjoy Waving Flags Don't Deserve To Have One"
+        ),
+    }
+
+    if best_key:
+        display = canon_labels.get(best_key, _title_case_print(best_key))
+
+        # Pull a colourway/variant in parentheses near the title
+        variant = None
+        # Search whole text for useful parentheticals
+        for m in re.finditer(r"\(([^)]{1,40})\)", text):
+            inner = m.group(1).strip()
+            if re.search(
+                r"(?i)\b(born|b\.?\s*\d{4}|\d+\s*(cm|in|mm)|edition|unique|"
+                r"executed|painted|this work|certificate)\b",
+                inner,
+            ):
+                continue
+            if re.search(
+                r"(?i)rain|grey|gray|sepia|silver|gold|pink|blue|green|white|"
+                r"black|emerald|tan|pow|\bla\b|v\.?\s*2|sky|slate|bright|"
+                r"chocolate|strawberry|colour|color",
+                inner,
+            ) or ("/" in inner):
+                variant = inner
+                break
+
+        # "Nola A/P (Grey Rain)" style — keep A/P only if no colourway found
+        if not variant and re.search(r"(?i)\bA/?P\b", text):
+            # don't append bare A/P as name noise unless colourway exists
+            pass
+
+        if variant and variant.lower() not in display.lower():
+            return f"{display} ({variant})"
+        return display
+
+    # 3) No known title — cut catalogue noise and return a short cleaned string
+    cut = re.search(
+        r"(?i)("
+        r"\s+\d+(?:\.\d+)?\s*[xX×]\s*\d+"
+        r"|\s+\(\d+[.,]\d*\s*[xX×]"
+        r"|\s+(screenprint|screen\s*print|lithograph|etching|giclee|giclée|"
+        r"woodcut|offset|silkscreen|acrylic|oil\s+on)\b"
+        r"|\s+(signed|numbered|inscribed|dated|stamped)\b"
+        r"|\s+(on\s+(arches|wove|paper|canvas|linen))\b"
+        r"|\s+(published\s+by|executed\s+in|painted\s+in|this\s+work\s+is|"
+        r"the\s+work\s+is|accompanied\s+by)\b"
+        r"|\s+(framed|image:|sheet:|full\s+sheet)\b"
+        r"|\s+\((this\s+work|executed|painted|unique|from\s+the)\b"
+        r"|\s+from\s+the\s+edition\b"
+        r"|\s+edition\s+of\s+\d+"
+        r")",
+        text,
+    )
+    if cut:
+        text = text[: cut.start()].strip(" ,;:.-")
+    text = re.sub(r"[\s,;:.-]+$", "", text).strip()
+    if len(text) > 72:
+        text = text[:72].rsplit(" ", 1)[0].strip(" ,;:.-")
+    return text or original[:60]
+
+
 def match_house(text: str) -> Optional[str]:
     """Return tracked house key if text mentions one of our houses."""
     t = text.lower()
@@ -321,11 +481,12 @@ def make_lot(
     status: str = "upcoming",
     lot_id: Optional[str] = None,
 ) -> dict:
+    cleaned = clean_print_name(print_name)
     if not lot_id:
-        lot_id = f"{source}-{stable_id(url or print_name, auction_date)}"
+        lot_id = f"{source}-{stable_id(url or cleaned or print_name, auction_date)}"
     return {
         "id": lot_id,
-        "print_name": print_name.strip(),
+        "print_name": cleaned or (print_name or "").strip(),
         "auction_house": auction_house,
         "auction_date": auction_date,
         "edition": edition or "",
