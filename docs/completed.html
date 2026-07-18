@@ -20,43 +20,41 @@
 
   <main>
     <div class="meta-bar">
-      <span id="last-updated">Loading...</span>
-      <span id="lot-count"></span>
+      <div class="meta-left">
+        <span id="last-updated">Loading...</span>
+        <span id="lot-count"></span>
+      </div>
+      <div class="currency-toggle" id="currency-toggle" hidden>
+        <span class="filter-label">Show prices in</span>
+        <div class="currency-pills" role="group" aria-label="Display currency for all lots">
+          <button type="button" class="currency-pill is-active" data-currency="ORIGINAL">Original</button>
+          <button type="button" class="currency-pill" data-currency="GBP">£ GBP</button>
+          <button type="button" class="currency-pill" data-currency="USD">$ USD</button>
+          <button type="button" class="currency-pill" data-currency="EUR">€ EUR</button>
+          <button type="button" class="currency-pill" data-currency="CHF">CHF</button>
+          <button type="button" class="currency-pill" data-currency="HKD">HKD</button>
+          <button type="button" class="currency-pill" data-currency="CNY">¥ CNY</button>
+        </div>
+        <span id="fx-note" class="fx-note" hidden></span>
+      </div>
     </div>
 
     <div class="filter-bar" id="filter-bar" style="display:none;">
-      <div class="filter-group filter-group-print">
-        <label class="filter-label" for="print-filter">Print name</label>
-        <div class="filter-controls">
-          <input
-            type="search"
-            id="print-filter"
-            class="filter-input"
-            placeholder="Filter by print name (e.g. Girl with Balloon)"
-            list="print-name-suggestions"
-            autocomplete="off"
-          />
-          <button type="button" id="print-filter-clear" class="filter-clear" hidden>
-            Clear
-          </button>
-        </div>
-        <datalist id="print-name-suggestions"></datalist>
+      <label class="filter-label" for="print-filter">Print name</label>
+      <div class="filter-controls">
+        <input
+          type="search"
+          id="print-filter"
+          class="filter-input"
+          placeholder="Filter by print name (e.g. Girl with Balloon)"
+          list="print-name-suggestions"
+          autocomplete="off"
+        />
+        <button type="button" id="print-filter-clear" class="filter-clear" hidden>
+          Clear
+        </button>
       </div>
-      <div class="filter-group filter-group-currency">
-        <label class="filter-label" for="currency-select">Currency</label>
-        <div class="filter-controls">
-          <select id="currency-select" class="filter-select" aria-label="Display currency">
-            <option value="ORIGINAL">Original</option>
-            <option value="GBP">GBP £</option>
-            <option value="USD">USD $</option>
-            <option value="EUR">EUR €</option>
-            <option value="CHF">CHF</option>
-            <option value="HKD">HKD</option>
-            <option value="CNY">CNY ¥</option>
-          </select>
-          <span id="fx-note" class="fx-note" hidden></span>
-        </div>
-      </div>
+      <datalist id="print-name-suggestions"></datalist>
     </div>
 
     <div id="auction-table-container">

@@ -92,39 +92,78 @@ main {
 
 .meta-bar {
   display: flex;
+  flex-wrap: wrap;
   justify-content: space-between;
-  align-items: center;
+  align-items: flex-start;
+  gap: 12px 20px;
   margin-bottom: 16px;
   color: #888;
   font-size: 12px;
 }
 
-/* Filters: print name + currency */
+.meta-left {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+
+/* Currency toggle — applies to the entire table, independent of print search */
+.currency-toggle {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 8px 10px;
+  max-width: 100%;
+}
+
+.currency-pills {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 6px;
+}
+
+.currency-pill {
+  padding: 6px 10px;
+  background: #1a1a1a;
+  border: 1px solid #444;
+  border-radius: 999px;
+  color: #aaa;
+  font-size: 12px;
+  font-family: inherit;
+  cursor: pointer;
+  transition: color 0.15s, border-color 0.15s, background 0.15s;
+  line-height: 1.2;
+}
+
+.currency-pill:hover {
+  color: #fff;
+  border-color: #666;
+}
+
+.currency-pill.is-active {
+  color: #0a0a0a;
+  background: #7ab8f5;
+  border-color: #7ab8f5;
+  font-weight: 600;
+}
+
+.fx-note {
+  color: #666;
+  font-size: 11px;
+  white-space: nowrap;
+}
+
+/* Print name filter (search only) */
 .filter-bar {
   display: flex;
   flex-wrap: wrap;
-  align-items: flex-end;
-  gap: 14px 20px;
+  align-items: center;
+  gap: 10px 14px;
   margin-bottom: 20px;
   padding: 12px 14px;
   background: #1a1a1a;
   border: 1px solid #333;
   border-radius: 4px;
-}
-
-.filter-group {
-  display: flex;
-  flex-direction: column;
-  gap: 6px;
-  min-width: 0;
-}
-
-.filter-group-print {
-  flex: 1 1 280px;
-}
-
-.filter-group-currency {
-  flex: 0 0 auto;
 }
 
 .filter-label {
@@ -140,7 +179,8 @@ main {
   display: flex;
   align-items: center;
   gap: 8px;
-  min-width: 0;
+  flex: 1;
+  min-width: 200px;
 }
 
 .filter-input {
@@ -163,8 +203,7 @@ main {
   color: #666;
 }
 
-.filter-input:focus,
-.filter-select:focus {
+.filter-input:focus {
   border-color: #7ab8f5;
   box-shadow: 0 0 0 2px rgba(122, 184, 245, 0.15);
 }
@@ -172,26 +211,6 @@ main {
 .filter-input::-webkit-search-cancel-button {
   -webkit-appearance: none;
   appearance: none;
-}
-
-.filter-select {
-  min-width: 120px;
-  padding: 9px 28px 9px 12px;
-  background: #111 url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='8' viewBox='0 0 12 8'%3E%3Cpath fill='%23999' d='M1 1l5 5 5-5'/%3E%3C/svg%3E") no-repeat right 10px center;
-  border: 1px solid #444;
-  border-radius: 4px;
-  color: #eee;
-  font-size: 14px;
-  font-family: inherit;
-  outline: none;
-  cursor: pointer;
-  appearance: none;
-  -webkit-appearance: none;
-}
-
-.filter-select option {
-  background: #1a1a1a;
-  color: #eee;
 }
 
 .filter-clear {
@@ -211,12 +230,6 @@ main {
   color: #fff;
   border-color: #666;
   background: #222;
-}
-
-.fx-note {
-  color: #666;
-  font-size: 11px;
-  white-space: nowrap;
 }
 
 .price-original {
@@ -374,8 +387,12 @@ footer {
 
   .meta-bar {
     flex-direction: column;
-    gap: 4px;
+    gap: 10px;
     align-items: flex-start;
+  }
+
+  .currency-toggle {
+    width: 100%;
   }
 
   .filter-bar {
@@ -383,20 +400,12 @@ footer {
     align-items: stretch;
   }
 
-  .filter-group-print,
-  .filter-group-currency {
-    flex: 1 1 auto;
-    width: 100%;
-  }
-
   .filter-controls {
     width: 100%;
   }
 
-  .filter-input,
-  .filter-select {
+  .filter-input {
     max-width: none;
-    width: 100%;
   }
 
   .fx-note {

@@ -476,24 +476,54 @@
     }
   }
 
+  function setActiveCurrencyPill(code) {
+    var pills = document.querySelectorAll(".currency-pill");
+    pills.forEach(function (btn) {
+      var active = btn.getAttribute("data-currency") === code;
+      btn.classList.toggle("is-active", active);
+      btn.setAttribute("aria-pressed", active ? "true" : "false");
+    });
+  }
+
+  function applyDisplayCurrency(code) {
+    var value = code || "ORIGINAL";
+    if (value !== "ORIGINAL" && SUPPORTED_CURRENCIES.indexOf(value) === -1) {
+      value = "ORIGINAL";
+    }
+    state.displayCurrency = value;
+    saveCurrency(value);
+    setActiveCurrencyPill(value);
+
+    // Re-render the full current table (all lots, or search-filtered subset).
+    // Conversion always applies to every visible row, not only search matches.
+    if (value === "ORIGINAL") {
+      applyFilterAndRender();
+      return;
+    }
+    ensureRates().then(function () {
+      applyFilterAndRender();
+    });
+  }
+
   function setupCurrency() {
-    var select = document.getElementById("currency-select");
-    if (!select || state.currencyWired) return;
+    var toggle = document.getElementById("currency-toggle");
+    var pills = document.querySelectorAll(".currency-pill");
+    if (!toggle || !pills.length) return;
+
+    toggle.hidden = false;
+
+    if (state.currencyWired) {
+      setActiveCurrencyPill(state.displayCurrency);
+      return;
+    }
     state.currencyWired = true;
 
     state.displayCurrency = loadSavedCurrency();
-    select.value = state.displayCurrency;
+    setActiveCurrencyPill(state.displayCurrency);
 
-    select.addEventListener("change", function () {
-      var value = select.value || "ORIGINAL";
-      state.displayCurrency = value;
-      saveCurrency(value);
-      if (value === "ORIGINAL") {
-        applyFilterAndRender();
-        return;
-      }
-      ensureRates().then(function () {
-        applyFilterAndRender();
+    pills.forEach(function (btn) {
+      btn.addEventListener("click", function () {
+        applyDisplayCurrency(btn.getAttribute("data-currency") || "ORIGINAL");
       });
     });
   }
