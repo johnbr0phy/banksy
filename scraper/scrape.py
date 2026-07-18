@@ -76,7 +76,7 @@ KNOWN_PRINTS = [
     "applause", "cnd soldiers", "flying copper", "love rat", "no ball games",
     "welcome to hell", "queen vic", "queen victoria", "hmv", "hmv dog",
     "love is in the air", "because i'm worthless", "banksquiat",
-    "christ with shopping bags", "smiling copper", "bullet hole", "lenin",
+    "christ with shopping bags", "smiling copper", "bullet hole bust", "bullet hole", "lenin",
     "festival", "soup cans", "radar rat", "get out while you can",
     "mickey snake", "3d rat", "rat with scalpel", "barely legal", "met ball",
     "kids on guns", "brick handbag", "any person found", "crude oil",
@@ -945,6 +945,102 @@ async def scrape_bonhams(pw) -> tuple[list, list]:
     return upcoming, completed
 
 
+async def fetch_phillips_detail_estimate(page, url: str) -> tuple:
+    """
+    Phillips search cards often only show 'Sold for £X' — the estimate lives
+    on the lot detail page (e.g. 'Estimate £150,000–200,000').
+    Returns (low, high, currency) or (None, None, None).
+    """
+    try:
+        await page.goto(url, wait_until="domcontentloaded", timeout=35000)
+        await page.wait_for_timeout(2500)
+        text = await page.evaluate(
+            """() => {
+              // Prefer dedicated estimate blocks
+              const blocks = [...document.querySelectorAll(
+                '[class*="estimate" i], [class*="Estimate"], [data-testid*="estimate" i]'
+              )].map(e => (e.innerText || '').trim()).filter(Boolean);
+              if (blocks.length) return blocks.slice(0, 5).join('\\n');
+              return (document.body && document.body.innerText) ? document.body.innerText.slice(0, 4000) : '';
+            }"""
+        )
+        if not text:
+            return None, None, None
+
+        # "Estimate £150,000–200,000" or "Estimate\n£150,000–200,000"
+        m = re.search(
+            r"estimate\s*[:\n\r\s]*((?:US\$|HK\$|£|€|\$|USD|GBP|EUR|CHF)?\s*[\d,]+(?:\.\d+)?\s*[-–—to]+\s*(?:US\$|HK\$|£|€|\$)?\s*[\d,]+(?:\.\d+)?)",
+            text,
+            re.I,
+        )
+        if m:
+            low, high, cur = parse_estimate(m.group(1))
+            if low or high:
+                return low, high, cur
+
+        # Fallback: first currency range after the word Estimate
+        idx = re.search(r"\bestimate\b", text, re.I)
+        if idx:
+            window = text[idx.start() : idx.start() + 120]
+            low, high, cur = parse_estimate(window)
+            if low or high:
+                return low, high, cur
+    except Exception as e:
+        log.debug("Phillips detail estimate failed for %s: %s", url, e)
+    return None, None, None
+
+
+async def enrich_phillips_estimates(pw, lots: list, *, limit: int = 50) -> list:
+    """Fill missing estimates by opening Phillips detail pages."""
+    need = [
+        lot
+        for lot in lots
+        if (lot.get("source") == "phillips" or "phillips.com/detail" in (lot.get("url") or ""))
+        and lot.get("low_estimate") is None
+        and lot.get("high_estimate") is None
+        and lot.get("url")
+        and "phillips.com" in lot["url"]
+    ]
+    if not need:
+        return lots
+
+    need = need[:limit]
+    log.info("Phillips: enriching estimates for %d detail pages", len(need))
+    browser = None
+    try:
+        browser, page = await new_page(pw)
+        by_id = {lot["id"]: lot for lot in lots}
+        for lot in need:
+            low, high, cur = await fetch_phillips_detail_estimate(page, lot["url"])
+            if low is None and high is None:
+                continue
+            target = by_id.get(lot["id"], lot)
+            target["low_estimate"] = low
+            target["high_estimate"] = high
+            if cur and not target.get("currency"):
+                target["currency"] = cur
+            elif cur and target.get("realised_price") is None:
+                target["currency"] = cur
+            # Keep realised currency if present; estimates are usually same currency
+            if cur and target.get("currency") and target["currency"] != cur:
+                # Prefer estimate currency only when no realised price
+                if target.get("realised_price") is None:
+                    target["currency"] = cur
+            log.info(
+                "Phillips estimate %s → %s-%s %s",
+                lot.get("print_name"),
+                low,
+                high,
+                cur,
+            )
+    except Exception as e:
+        log.error("Phillips estimate enrichment failed: %s", e)
+    finally:
+        if browser:
+            await browser.close()
+    return lots
+
+
 async def scrape_phillips(pw) -> tuple[list, list]:
     upcoming, completed = [], []
     for page_num in range(1, 5):
@@ -961,6 +1057,11 @@ async def scrape_phillips(pw) -> tuple[list, list]:
                 completed.append(lot)
             else:
                 upcoming.append(lot)
+
+    # Search results rarely include estimates next to sold prices — pull from detail pages
+    completed = await enrich_phillips_estimates(pw, completed, limit=40)
+    upcoming = await enrich_phillips_estimates(pw, upcoming, limit=20)
+
     log.info("Phillips: %d upcoming, %d completed", len(upcoming), len(completed))
     return upcoming, completed
 
