@@ -7,7 +7,7 @@ You are maintaining the **Banksy Print Tracker** — a GitHub Pages site that li
 ## Repository
 
 - **Repo:** `johnbr0phy/banksy`
-- **Data file:** `data/upcoming.json`
+- **Data file:** `docs/data/upcoming.json` (and keep `data/upcoming.json` in sync — same contents)
 - **Branch:** `main`
 - **Site:** https://johnbr0phy.github.io/banksy/
 
@@ -79,7 +79,7 @@ Rude Snowman, Season's Greetings, Sunflowers, Welcome to Hell
 
 ### 5. Update the data file
 
-The data file is `data/upcoming.json`. Its structure is:
+The data file is `docs/data/upcoming.json` (mirror to `data/upcoming.json`). Its structure is:
 
 ```json
 {
@@ -125,17 +125,18 @@ After updating `data/upcoming.json`:
 ## Example workflow
 
 ```
-1. Read data/upcoming.json to get current lots
+1. Read docs/data/upcoming.json to get current lots
 2. Search LiveAuctioneers for "banksy print" — filter results
-3. Search Phillips for "banksy" — filter results
-4. Search Sotheby's for "banksy" — filter results
-5. Search Christie's for "banksy print" — filter results
-6. Search any additional sources
-7. Merge all new lots into existing data
-8. Remove lots with past auction dates
-9. Update last_updated timestamp
-10. Write updated data/upcoming.json
-11. Commit and push to main
+3. Search Bonhams for "banksy" — filter results
+4. Search Phillips for "banksy" — filter results
+5. Search Sotheby's for "banksy" — filter results
+6. Search Christie's for "banksy print" — filter results
+7. Search any additional sources
+8. Merge all new lots into existing data
+9. Remove lots with past auction dates
+10. Update last_updated timestamp
+11. Write docs/data/upcoming.json AND data/upcoming.json (identical)
+12. Commit and push to main
 ```
 
 ## Error handling

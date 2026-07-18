@@ -172,7 +172,8 @@
   }
 
   function init() {
-    fetch("../data/upcoming.json")
+    // Data lives under docs/data so GitHub Pages (source: /docs) can serve it.
+    fetch("data/upcoming.json")
       .then(function (res) {
         if (!res.ok) throw new Error("HTTP " + res.status);
         return res.json();
