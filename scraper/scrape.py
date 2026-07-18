@@ -302,11 +302,16 @@ def is_plausible(lot: dict, mode: str) -> bool:
 
     if mode == "completed":
         price = lot.get("realised_price")
-        if not price or price <= 0:
-            return False
-        if major or source in TRACKED_HOUSES:
-            return has_known_title(title) or len(title) > 12
-        return has_known_title(title) and price >= 2000
+        if price and price > 0:
+            if major or source in TRACKED_HOUSES:
+                return has_known_title(title) or len(title) > 12
+            return has_known_title(title) and price >= 2000
+        # Major houses sometimes hide hammer behind login; still list known prints
+        # when we have an estimate and a past sale signal.
+        if (major or source in TRACKED_HOUSES) and has_known_title(title):
+            if lot.get("low_estimate") or lot.get("high_estimate"):
+                return True
+        return False
 
     # upcoming: prefer known titles or real estimates from major houses
     if has_known_title(title):
@@ -411,6 +416,74 @@ EXTRACT_CARDS_JS = """
 """
 
 
+def extract_title_from_lines(lines: list) -> str:
+    """
+    Build a print title from card lines.
+
+    Sotheby's search cards look like:
+      ['Banksy', 'save', 'Trolleys (Color)', 'Estimate', '30,000 USD - 50,000 USD']
+    The intervening 'save' (wishlist UI) previously made us keep title='Banksy' only,
+    which then failed the authenticity filter.
+    """
+    if not lines:
+        return ""
+
+    ui_only = re.compile(
+        r"^(save|saved|estimate|est\.?|lot sold.*|sold for.*|lot closed|log in.*|"
+        r"follow|share|bid|login|register|view results.*)$",
+        re.I,
+    )
+    moneyish = re.compile(
+        r"(usd|gbp|eur|chf|hkd|estimate|\d{1,3}(?:,\d{3})+|\£|\$|€)",
+        re.I,
+    )
+
+    banksy_i = next(
+        (i for i, line in enumerate(lines) if re.search(r"\bbanksy\b", line, re.I)),
+        None,
+    )
+    if banksy_i is None:
+        return lines[0]
+
+    # Prefer a following line that looks like a work title (skip UI chrome).
+    for j in range(banksy_i + 1, len(lines)):
+        line = (lines[j] or "").strip()
+        if not line or len(line) < 2:
+            continue
+        if ui_only.match(line):
+            continue
+        # Pure price lines
+        if moneyish.search(line) and not re.search(r"[A-Za-z]{3,}", re.sub(r"banksy", "", line, flags=re.I)):
+            continue
+        if re.match(r"^banksy\.?$", line, re.I):
+            continue
+        artist = lines[banksy_i].strip()
+        if re.match(r"^banksy\.?$", artist, re.I):
+            return f"Banksy - {line}"
+        if re.search(r"\bbanksy\b", line, re.I):
+            return line
+        return f"Banksy - {line}"
+
+    # Fallback: artist line may already include the title
+    return lines[banksy_i].strip()
+
+
+def date_from_url(href: str) -> str:
+    """Sotheby's etc. embed sale year in the path: /auction/2023/..."""
+    if not href:
+        return ""
+    m = re.search(r"/auction/(\d{4})/", href)
+    if m:
+        # Year-only; use mid-year so it sorts into that year on completed.
+        return f"{m.group(1)}-06-15"
+    m = re.search(r"/(20\d{2})/", href)
+    if m:
+        year = int(m.group(1))
+        if 1990 <= year <= 2100:
+            return f"{year}-06-15"
+    return ""
+
+
 def cards_to_lots(
     cards: list,
     *,
@@ -423,32 +496,39 @@ def cards_to_lots(
     for card in cards:
         lines = card.get("lines") or []
         blob = " ".join(lines)
-        if not re.search(r"banksy", blob, re.I):
+        href = card.get("href") or ""
+        if not re.search(r"banksy", blob + " " + href, re.I):
             continue
 
-        # Title
-        title = ""
-        for i, line in enumerate(lines):
-            if re.search(r"banksy", line, re.I):
-                title = line
-                if i + 1 < len(lines) and len(lines[i + 1]) > 2 and not re.search(
-                    r"sold|estimate|save|lot", lines[i + 1], re.I
-                ):
-                    # "Banksy" then print name on next line
-                    if re.match(r"^banksy\.?$", line, re.I) or re.match(r"^banksy\s*$", line, re.I):
-                        title = f"Banksy - {lines[i + 1]}"
-                break
+        title = extract_title_from_lines(lines)
         if not title:
             title = lines[0] if lines else ""
         if not is_original_banksy_print(title, blob):
             continue
 
-        sold_line = next((l for l in lines if re.search(r"sold|realised|realized|lot sold", l, re.I)), "")
+        sold_line = next(
+            (l for l in lines if re.search(r"sold|realised|realized|lot sold", l, re.I)),
+            "",
+        )
         realised, sold_cur = parse_sold_price(sold_line or blob)
 
-        est_line = next((l for l in lines if re.search(r"estimate|est\.|estimated", l, re.I)), "")
+        # Estimate may be on the line after "Estimate"
+        est_line = ""
+        for i, line in enumerate(lines):
+            if re.search(r"estimate|est\.|estimated", line, re.I):
+                est_line = line
+                if i + 1 < len(lines) and re.search(r"\d", lines[i + 1]):
+                    est_line = lines[i + 1]
+                break
         if not est_line:
-            est_line = next((l for l in lines if re.search(r"£|\$|€|USD|GBP", l) and not re.search(r"sold", l, re.I)), "")
+            est_line = next(
+                (
+                    l
+                    for l in lines
+                    if re.search(r"£|\$|€|USD|GBP", l) and not re.search(r"sold", l, re.I)
+                ),
+                "",
+            )
         low, high, est_cur = parse_estimate(est_line)
 
         date = ""
@@ -458,24 +538,32 @@ def cards_to_lots(
                 date = d
                 break
         if not date:
-            m = re.search(r"(\d{1,2}\s+[A-Za-z]{3,9}\s+\d{4}|[A-Za-z]{3,9}\s+\d{1,2}\s+\d{4})", blob)
+            m = re.search(
+                r"(\d{1,2}\s+[A-Za-z]{3,9}\s+\d{4}|[A-Za-z]{3,9}\s+\d{1,2}\s+\d{4})",
+                blob,
+            )
             if m:
                 date = parse_auction_date(m.group(1))
+        if not date:
+            date = date_from_url(href)
 
         currency = sold_cur if realised else est_cur
 
-        # Classify upcoming vs completed
-        is_sold = bool(realised) or bool(re.search(r"lot sold|sold for|price realised|price realized", blob, re.I))
-        if prefer_completed or is_sold:
+        lot_closed = bool(re.search(r"lot closed|lot sold|sold for|price realised|price realized", blob, re.I))
+        is_sold = bool(realised) or lot_closed
+        # Past-year URLs are completed even when hammer is login-gated.
+        url_year = re.search(r"/auction/(20\d{2})/", href)
+        past_by_url = bool(url_year and int(url_year.group(1)) < int(today[:4]))
+
+        if prefer_completed or is_sold or past_by_url:
             status = "completed"
-            if date and date > today and not is_sold:
+            if date and date > today and not is_sold and not past_by_url:
                 status = "upcoming"
         else:
             status = "upcoming"
             if date and date < today:
                 status = "completed"
 
-        href = card.get("href") or ""
         lot = make_lot(
             source=source,
             print_name=title,
@@ -490,6 +578,15 @@ def cards_to_lots(
             status=status,
             lot_id=f"{source}-{stable_id(href)}",
         )
+        # Keep closed major-house lots even when hammer is hidden ("Log in to view results")
+        if status == "completed" and not lot.get("realised_price"):
+            if (
+                source in TRACKED_HOUSES
+                and has_known_title(title)
+                and (lot.get("low_estimate") or lot_closed or past_by_url)
+            ):
+                lots.append(lot)
+                continue
         if is_plausible(lot, status):
             lots.append(lot)
     return lots
