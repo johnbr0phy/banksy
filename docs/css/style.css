@@ -148,6 +148,12 @@ main {
   color: #a8d4ff;
 }
 
+.price-realised {
+  color: #9fd89f;
+  font-weight: 600;
+  white-space: nowrap;
+}
+
 .thumb {
   width: 60px;
   height: 60px;

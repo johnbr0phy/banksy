@@ -1,5 +1,5 @@
 {
-  "last_updated": "2026-07-18T15:17:37Z",
+  "last_updated": "2026-07-18T15:35:34Z",
   "lots": [
     {
       "id": "bonhams-31911-57",
@@ -9,10 +9,28 @@
       "edition": "",
       "low_estimate": 20000,
       "high_estimate": 30000,
+      "realised_price": null,
       "currency": "USD",
       "url": "https://www.bonhams.com/auction/31911/lot/57/banksy-born-1974-applause/",
       "image_url": "https://images2.bonhams.com/image?src=Images/live/2026-07/01/25872914-1-1.jpg",
       "source": "bonhams",
+      "status": "upcoming",
+      "is_original": true
+    },
+    {
+      "id": "bonhams-inv-577c8e1b3d72",
+      "print_name": "Banksy (born 1974); Applause;",
+      "auction_house": "Bonhams",
+      "auction_date": "",
+      "edition": "",
+      "low_estimate": 20000,
+      "high_estimate": 30000,
+      "realised_price": null,
+      "currency": "USD",
+      "url": "https://www.invaluable.com/auction-lot/banksy-born-1974-applause-57-c-bf5280f33b",
+      "image_url": "https://image.invaluable.com/static/noimage_noborder.png",
+      "source": "bonhams",
+      "status": "upcoming",
       "is_original": true
     }
   ]

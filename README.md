@@ -13,23 +13,23 @@ A daily-updated static site tracking upcoming auction lots for original Banksy p
 
 Your site will be live at `https://<username>.github.io/banksy/`
 
-### 2. Add Auction Site Credentials
+### 2. Auction houses tracked
 
-Go to **Settings > Secrets and variables > Actions** and add these 8 repository secrets:
+Daily scrapes check these houses (public pages where possible — **no logins required**):
 
-| Secret | Description |
-|--------|-------------|
-| `LIVEAUCTIONEERS_EMAIL` | LiveAuctioneers login email |
-| `LIVEAUCTIONEERS_PASSWORD` | LiveAuctioneers login password |
-| `PHILLIPS_EMAIL` | Phillips login email |
-| `PHILLIPS_PASSWORD` | Phillips login password |
-| `SOTHEBYS_EMAIL` | Sotheby's login email |
-| `SOTHEBYS_PASSWORD` | Sotheby's login password |
-| `CHRISTIES_EMAIL` | Christie's login email |
-| `CHRISTIES_PASSWORD` | Christie's login password |
+| House | Notes |
+|-------|--------|
+| Bonhams | Upcoming + past results |
+| Christie's | Best-effort (often bot-protected) |
+| Forum Auctions | Prints / Banksy department |
+| Heritage Auctions | Best-effort |
+| Koller Auctions | Best-effort |
+| Phillips | Strong completed / realised data |
+| Roseberys | Realised results |
+| Sotheby's | Available + past lots |
+| Tate Ward | Strong realised data |
 
-Any missing credentials will cause that scraper to be skipped (not crash).
-
+Invaluable and LiveAuctioneers are also scanned as **aggregators**, but only lots from the houses above (or known print titles) are kept.
 ### 3. Trigger a Manual Scrape
 
 1. Go to **Actions > Daily Scrape**

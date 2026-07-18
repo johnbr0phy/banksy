@@ -46,11 +46,11 @@ jobs:
         run: |
           git config user.name "github-actions[bot]"
           git config user.email "github-actions[bot]@users.noreply.github.com"
-          git add data/upcoming.json docs/data/upcoming.json
+          git add data/upcoming.json data/completed.json docs/data/upcoming.json docs/data/completed.json
           if git diff --cached --quiet; then
             echo "No changes to commit"
             exit 0
           fi
-          git commit -m "Update upcoming auction data $(date -u +%Y-%m-%dT%H:%M:%SZ)"
+          git commit -m "Update auction data $(date -u +%Y-%m-%dT%H:%M:%SZ)"
           git pull --rebase origin main || true
           git push
