@@ -1,5 +1,5 @@
 {
-  "last_updated": "2026-07-18T15:35:34Z",
+  "last_updated": "2026-07-18T15:41:26Z",
   "lots": [
     {
       "id": "phillips-8e1d73afeb4c",
@@ -1372,7 +1372,7 @@
       "realised_price": 18750,
       "currency": "GBP",
       "url": "https://www.tateward.com/auction/lot/186-banksy-british-1974--laugh-now-2004/",
-      "image_url": "https://trumanward.bidpath.cloud/stock/22649-0-medium.jpg?v=63916268386300",
+      "image_url": "",
       "source": "tateward",
       "status": "completed",
       "is_original": true
@@ -1470,6 +1470,54 @@
       "url": "https://www.roseberys.co.uk/bidding/A0777-prints-multiples-657/405-banksybritish-b1974-jack-and-jill-2005screenprint-on-613602",
       "image_url": "https://am-s3-bucket-assets.s3.eu-west-2.amazonaws.com/roseberys/prod/lot_images/medium/8fb64eb8-0513-f111-8405-6045bdd1fa9a/5435b851-f81d-f111-8340-7c1e5266026b.webp",
       "source": "roseberys",
+      "status": "completed",
+      "is_original": true
+    },
+    {
+      "id": "sothebys-4391676db1c7",
+      "print_name": "BANKSY | I FOUGHT THE LAW",
+      "auction_house": "Sotheby's",
+      "auction_date": "",
+      "edition": "",
+      "low_estimate": null,
+      "high_estimate": null,
+      "realised_price": 35000,
+      "currency": "GBP",
+      "url": "https://www.sothebys.com/en/buy/auction/2020/banksy/banksy-i-fought-the-law",
+      "image_url": "",
+      "source": "sothebys",
+      "status": "completed",
+      "is_original": true
+    },
+    {
+      "id": "sothebys-73bb0dd314cf",
+      "print_name": "BANKSY | APPLAUSE",
+      "auction_house": "Sotheby's",
+      "auction_date": "",
+      "edition": "",
+      "low_estimate": null,
+      "high_estimate": null,
+      "realised_price": 43750,
+      "currency": "GBP",
+      "url": "https://www.sothebys.com/en/buy/auction/2020/banksy/banksy-applause",
+      "image_url": "",
+      "source": "sothebys",
+      "status": "completed",
+      "is_original": true
+    },
+    {
+      "id": "sothebys-c0ef1a1541d9",
+      "print_name": "BANKSY | FLYING COPPER",
+      "auction_house": "Sotheby's",
+      "auction_date": "",
+      "edition": "",
+      "low_estimate": null,
+      "high_estimate": null,
+      "realised_price": 75000,
+      "currency": "GBP",
+      "url": "https://www.sothebys.com/en/buy/auction/2020/banksy/banksy-flying-copper",
+      "image_url": "",
+      "source": "sothebys",
       "status": "completed",
       "is_original": true
     }
