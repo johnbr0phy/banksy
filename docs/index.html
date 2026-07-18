@@ -25,21 +25,38 @@
     </div>
 
     <div class="filter-bar" id="filter-bar" style="display:none;">
-      <label class="filter-label" for="print-filter">Print name</label>
-      <div class="filter-controls">
-        <input
-          type="search"
-          id="print-filter"
-          class="filter-input"
-          placeholder="Filter by print name (e.g. Girl with Balloon)"
-          list="print-name-suggestions"
-          autocomplete="off"
-        />
-        <button type="button" id="print-filter-clear" class="filter-clear" hidden>
-          Clear
-        </button>
+      <div class="filter-group filter-group-print">
+        <label class="filter-label" for="print-filter">Print name</label>
+        <div class="filter-controls">
+          <input
+            type="search"
+            id="print-filter"
+            class="filter-input"
+            placeholder="Filter by print name (e.g. Girl with Balloon)"
+            list="print-name-suggestions"
+            autocomplete="off"
+          />
+          <button type="button" id="print-filter-clear" class="filter-clear" hidden>
+            Clear
+          </button>
+        </div>
+        <datalist id="print-name-suggestions"></datalist>
       </div>
-      <datalist id="print-name-suggestions"></datalist>
+      <div class="filter-group filter-group-currency">
+        <label class="filter-label" for="currency-select">Currency</label>
+        <div class="filter-controls">
+          <select id="currency-select" class="filter-select" aria-label="Display currency">
+            <option value="ORIGINAL">Original</option>
+            <option value="GBP">GBP £</option>
+            <option value="USD">USD $</option>
+            <option value="EUR">EUR €</option>
+            <option value="CHF">CHF</option>
+            <option value="HKD">HKD</option>
+            <option value="CNY">CNY ¥</option>
+          </select>
+          <span id="fx-note" class="fx-note" hidden></span>
+        </div>
+      </div>
     </div>
 
     <div id="auction-table-container">

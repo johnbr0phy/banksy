@@ -10,35 +10,207 @@
     CNY: "\u00a5",
   };
 
+  var SUPPORTED_CURRENCIES = ["GBP", "USD", "EUR", "CHF", "HKD", "CNY"];
+
+  // Fallback rates: units of currency per 1 USD (approx., used if live FX fails)
+  var FALLBACK_RATES_USD = {
+    USD: 1,
+    GBP: 0.79,
+    EUR: 0.92,
+    CHF: 0.88,
+    HKD: 7.8,
+    CNY: 7.25,
+  };
+
+  var STORAGE_KEY = "banksy_display_currency";
+  var RATES_CACHE_KEY = "banksy_fx_rates_v1";
+
   var state = {
     mode: "upcoming",
     allLots: [],
     filterQuery: "",
+    displayCurrency: "ORIGINAL", // ORIGINAL | GBP | USD | ...
+    ratesToUsd: null, // { USD:1, GBP: x, ... } amount of currency per 1 USD
+    ratesDate: null,
+    ratesSource: "fallback",
+    filterWired: false,
+    currencyWired: false,
   };
+
+  function loadSavedCurrency() {
+    try {
+      var saved = localStorage.getItem(STORAGE_KEY);
+      if (saved === "ORIGINAL" || SUPPORTED_CURRENCIES.indexOf(saved) !== -1) {
+        return saved;
+      }
+    } catch (e) {
+      /* ignore */
+    }
+    return "ORIGINAL";
+  }
+
+  function saveCurrency(code) {
+    try {
+      localStorage.setItem(STORAGE_KEY, code);
+    } catch (e) {
+      /* ignore */
+    }
+  }
+
+  function loadCachedRates() {
+    try {
+      var raw = localStorage.getItem(RATES_CACHE_KEY);
+      if (!raw) return null;
+      var data = JSON.parse(raw);
+      if (!data || !data.ratesToUsd || !data.fetchedAt) return null;
+      // Cache for 12 hours
+      if (Date.now() - data.fetchedAt > 12 * 60 * 60 * 1000) return null;
+      return data;
+    } catch (e) {
+      return null;
+    }
+  }
+
+  function saveCachedRates(ratesToUsd, dateStr) {
+    try {
+      localStorage.setItem(
+        RATES_CACHE_KEY,
+        JSON.stringify({
+          ratesToUsd: ratesToUsd,
+          date: dateStr || null,
+          fetchedAt: Date.now(),
+        })
+      );
+    } catch (e) {
+      /* ignore */
+    }
+  }
+
+  /**
+   * Frankfurter returns rates as "1 base = N quote".
+   * We request base=USD so rates[C] = units of C per 1 USD.
+   */
+  function fetchLiveRates() {
+    var cached = loadCachedRates();
+    if (cached) {
+      state.ratesToUsd = cached.ratesToUsd;
+      state.ratesDate = cached.date;
+      state.ratesSource = "cache";
+      return Promise.resolve(state.ratesToUsd);
+    }
+
+    var symbols = SUPPORTED_CURRENCIES.filter(function (c) {
+      return c !== "USD";
+    }).join(",");
+    var url =
+      "https://api.frankfurter.app/latest?from=USD&to=" +
+      encodeURIComponent(symbols);
+
+    return fetch(url)
+      .then(function (res) {
+        if (!res.ok) throw new Error("FX HTTP " + res.status);
+        return res.json();
+      })
+      .then(function (data) {
+        var rates = { USD: 1 };
+        SUPPORTED_CURRENCIES.forEach(function (c) {
+          if (c === "USD") return;
+          if (data.rates && data.rates[c] != null) {
+            rates[c] = Number(data.rates[c]);
+          } else {
+            rates[c] = FALLBACK_RATES_USD[c];
+          }
+        });
+        state.ratesToUsd = rates;
+        state.ratesDate = data.date || null;
+        state.ratesSource = "live";
+        saveCachedRates(rates, state.ratesDate);
+        return rates;
+      })
+      .catch(function () {
+        state.ratesToUsd = Object.assign({}, FALLBACK_RATES_USD);
+        state.ratesDate = null;
+        state.ratesSource = "fallback";
+        return state.ratesToUsd;
+      });
+  }
+
+  function ensureRates() {
+    if (state.ratesToUsd) return Promise.resolve(state.ratesToUsd);
+    return fetchLiveRates();
+  }
+
+  function convertAmount(amount, fromCurrency, toCurrency) {
+    if (amount == null || isNaN(amount)) return null;
+    if (!toCurrency || toCurrency === "ORIGINAL" || toCurrency === fromCurrency) {
+      return Number(amount);
+    }
+    var from = (fromCurrency || "GBP").toUpperCase();
+    var to = toCurrency.toUpperCase();
+    var rates = state.ratesToUsd || FALLBACK_RATES_USD;
+    var fromRate = rates[from];
+    var toRate = rates[to];
+    if (!fromRate || !toRate) return Number(amount);
+    // amount in FROM -> USD -> TO
+    var usd = Number(amount) / fromRate;
+    return usd * toRate;
+  }
 
   function formatCurrency(amount, currency) {
     if (amount == null || isNaN(amount)) return "\u2014";
-    var symbol = CURRENCY_SYMBOLS[currency] || currency + " ";
-    return symbol + Number(amount).toLocaleString();
+    var code = currency || "GBP";
+    var symbol = CURRENCY_SYMBOLS[code] || code + " ";
+    var rounded = Math.round(Number(amount));
+    return symbol + rounded.toLocaleString();
+  }
+
+  function displayCurrencyFor(lot) {
+    if (state.displayCurrency === "ORIGINAL") {
+      return lot.currency || "GBP";
+    }
+    return state.displayCurrency;
+  }
+
+  function formatAmountForLot(amount, lot) {
+    if (amount == null || isNaN(amount)) return "\u2014";
+    var from = lot.currency || "GBP";
+    var to = displayCurrencyFor(lot);
+    var converted = convertAmount(amount, from, to);
+    var label = formatCurrency(converted, to);
+    // When converting, show original in a muted secondary note
+    if (
+      state.displayCurrency !== "ORIGINAL" &&
+      from.toUpperCase() !== state.displayCurrency
+    ) {
+      var orig = formatCurrency(amount, from);
+      return (
+        label +
+        ' <span class="price-original" title="Original currency">(' +
+        escapeHtml(orig) +
+        ")</span>"
+      );
+    }
+    return label;
   }
 
   function formatEstimate(lot) {
     if (lot.low_estimate == null && lot.high_estimate == null) return "Estimate N/A";
-    var curr = lot.currency || "GBP";
     if (lot.low_estimate != null && lot.high_estimate != null) {
       return (
-        formatCurrency(lot.low_estimate, curr) +
+        formatAmountForLot(lot.low_estimate, lot) +
         " \u2013 " +
-        formatCurrency(lot.high_estimate, curr)
+        formatAmountForLot(lot.high_estimate, lot)
       );
     }
-    if (lot.low_estimate != null) return formatCurrency(lot.low_estimate, curr) + "+";
-    return "Up to " + formatCurrency(lot.high_estimate, curr);
+    if (lot.low_estimate != null) {
+      return formatAmountForLot(lot.low_estimate, lot) + "+";
+    }
+    return "Up to " + formatAmountForLot(lot.high_estimate, lot);
   }
 
   function formatRealised(lot) {
     if (lot.realised_price == null) return "\u2014";
-    return formatCurrency(lot.realised_price, lot.currency || "GBP");
+    return formatAmountForLot(lot.realised_price, lot);
   }
 
   function formatDate(dateStr) {
@@ -99,7 +271,6 @@
     lots.forEach(function (lot) {
       var raw = (lot.print_name || "").trim();
       if (!raw) return;
-      // Prefer a cleaner display name for suggestions
       var label = raw.replace(/^Banksy\s*[-–—:]\s*/i, "").trim() || raw;
       var key = normalizeName(label);
       if (!key || seen[key]) return;
@@ -208,14 +379,31 @@
     var names = uniquePrintNames(lots);
     list.innerHTML = names
       .map(function (name) {
-        return "<option value=\"" + escapeHtml(name) + "\"></option>";
+        return '<option value="' + escapeHtml(name) + '"></option>';
       })
       .join("");
   }
 
+  function updateFxNote() {
+    var note = document.getElementById("fx-note");
+    if (!note) return;
+    if (state.displayCurrency === "ORIGINAL") {
+      note.hidden = true;
+      note.textContent = "";
+      return;
+    }
+    note.hidden = false;
+    if (state.ratesSource === "live" || state.ratesSource === "cache") {
+      note.textContent = state.ratesDate
+        ? "Rates as of " + state.ratesDate
+        : "Live FX rates";
+    } else {
+      note.textContent = "Approx. FX rates";
+    }
+  }
+
   function applyFilterAndRender() {
     var mode = state.mode;
-    var emptyState = document.getElementById("empty-state");
     var container = document.getElementById("auction-table-container");
     var countEl = document.getElementById("lot-count");
     var clearBtn = document.getElementById("print-filter-clear");
@@ -224,6 +412,8 @@
     if (clearBtn) {
       clearBtn.hidden = !query;
     }
+
+    updateFxNote();
 
     var lots = state.allLots.filter(function (lot) {
       return matchesPrintFilter(lot, query);
@@ -256,7 +446,6 @@
               : "No upcoming auctions found. Check back soon.") +
           "</div>";
       }
-      if (emptyState) emptyState.style.display = "block";
       return;
     }
 
@@ -268,10 +457,10 @@
     var filterBar = document.getElementById("filter-bar");
     var input = document.getElementById("print-filter");
     var clearBtn = document.getElementById("print-filter-clear");
-    if (!input) return;
-
     if (filterBar) filterBar.style.display = "flex";
+    if (!input || state.filterWired) return;
 
+    state.filterWired = true;
     input.addEventListener("input", function () {
       state.filterQuery = input.value || "";
       applyFilterAndRender();
@@ -285,6 +474,28 @@
         input.focus();
       });
     }
+  }
+
+  function setupCurrency() {
+    var select = document.getElementById("currency-select");
+    if (!select || state.currencyWired) return;
+    state.currencyWired = true;
+
+    state.displayCurrency = loadSavedCurrency();
+    select.value = state.displayCurrency;
+
+    select.addEventListener("change", function () {
+      var value = select.value || "ORIGINAL";
+      state.displayCurrency = value;
+      saveCurrency(value);
+      if (value === "ORIGINAL") {
+        applyFilterAndRender();
+        return;
+      }
+      ensureRates().then(function () {
+        applyFilterAndRender();
+      });
+    });
   }
 
   function prepareLots(data, mode) {
@@ -324,13 +535,26 @@
     state.allLots = prepareLots(data, mode);
     populateSuggestions(state.allLots);
     setupFilter();
-    applyFilterAndRender();
+    setupCurrency();
+
+    var ready = Promise.resolve();
+    if (state.displayCurrency !== "ORIGINAL") {
+      ready = ensureRates();
+    }
+    ready.then(function () {
+      applyFilterAndRender();
+    });
   }
 
   function init() {
     var mode = pageMode();
     var dataUrl =
       mode === "completed" ? "data/completed.json" : "data/upcoming.json";
+
+    // Prefetch rates in background so switching currency is instant
+    fetchLiveRates().catch(function () {
+      /* fallback already applied */
+    });
 
     fetch(dataUrl)
       .then(function (res) {
