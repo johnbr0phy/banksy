@@ -63,6 +63,9 @@ def main() -> int:
             ("Lot sold: 63,000 GBP", (63000, "GBP")),
             ("PRICE REALISED: £28,840", (28840, "GBP")),
             ("Sold for $50,000", (50000, "USD")),
+            ("USD48260", (48260, "USD")),
+            ("GBP10880", (10880, "GBP")),
+            ("Passed", (None, "GBP")),
         ],
         parse_sold_price,
     )

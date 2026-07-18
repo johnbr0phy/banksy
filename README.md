@@ -30,6 +30,8 @@ Daily scrapes check these houses (public pages where possible — **no logins re
 | Tate Ward | Strong realised data |
 
 Invaluable and LiveAuctioneers are also scanned as **aggregators**, but only lots from the houses above (or known print titles) are kept.
+
+**Completed / realised** results are seeded from [banksy-value.com/realised.php](https://www.banksy-value.com/realised.php) (curated historical feed), then merged with house-specific scrapers so the Completed page stays dense even when individual auction sites block bots.
 ### 3. Trigger a Manual Scrape
 
 1. Go to **Actions > Daily Scrape**

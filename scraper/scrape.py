@@ -66,10 +66,10 @@ HOUSE_ALIASES = {
 KNOWN_PRINTS = [
     "girl with balloon", "love is in the bin", "flower thrower", "thrower",
     "laugh now", "pulp fiction", "jack and jill", "soup can", "kate moss",
-    "choose your weapon", "queue jumpers", "grannies", "happy choppers",
-    "happy chopper", "morons", "di-faced tenner", "barcode", "bomb hugger",
-    "bomb love", "bombing middle england", "bomb middle england", "flag",
-    "golf sale", "grin reaper", "have a nice day", "heavy weaponry",
+    "kate (colored)", "kate", "choose your weapon", "queue jumpers", "grannies",
+    "happy choppers", "happy chopper", "morons", "di-faced tenner", "barcode",
+    "bomb hugger", "bomb love", "bombing middle england", "bomb middle england",
+    "flag", "golf sale", "grin reaper", "have a nice day", "heavy weaponry",
     "i fought the law", "kissing coppers", "napalm", "nola", "rude copper",
     "sale ends", "stop and search", "toxic mary", "trolleys", "very little helps",
     "weston super mare", "wrong war", "gangsta rat", "monkey queen", "donuts",
@@ -78,6 +78,12 @@ KNOWN_PRINTS = [
     "love is in the air", "because i'm worthless", "banksquiat",
     "christ with shopping bags", "smiling copper", "bullet hole", "lenin",
     "festival", "soup cans", "radar rat", "get out while you can",
+    "mickey snake", "3d rat", "rat with scalpel", "barely legal", "met ball",
+    "kids on guns", "brick handbag", "any person found", "crude oil",
+    "people who enjoy waving flags", "axe", "monkey detonator", "record",
+    "sunflowers", "season's greetings", "brace yourself", "bad meaning good",
+    "forgive us our trespassing", "mean and vicious", "monkey parliament",
+    "shopping trolleys", "trolley hunters", "sale ends", "nola",
 ]
 
 EXCLUDE_PHRASES = [
@@ -91,9 +97,11 @@ EXCLUDE_PHRASES = [
     "charlie brown", "caveman fast food", "mona lisa ak",
 ]
 
+# Word-boundary excludes for untrusted secondary-market scrapes only.
+# Do NOT use these to reject banksy-value / major-house completed catalogues
+# (originals and editions both appear there).
 EXCLUDE_WORDS = [
-    "copy", "tribute", "nft", "sculpture", "bronze", "ceramic", "resin",
-    "figurine", "mug", "tshirt", "hoodie",
+    "copy", "tribute", "nft", "figurine", "mug", "tshirt", "hoodie",
 ]
 
 PRINT_INDICATORS = [
@@ -168,28 +176,45 @@ def parse_estimate(text: str) -> tuple:
 
 
 def parse_sold_price(text: str) -> tuple:
+    """Parse hammer/realised text. Returns (amount|None, currency)."""
     if not text:
         return None, "GBP"
+    raw = text.strip()
+    if re.search(r"\bpass(ed)?\b", raw, re.I):
+        return None, "GBP"
+
+    # banksy-value style: USD48260 / GBP10880 / EUR323750 (no space or symbol)
+    m = re.match(r"^(USD|GBP|EUR|CHF|HKD)\s*([\d,]+(?:\.\d+)?)\s*$", raw, re.I)
+    if m:
+        try:
+            return int(float(m.group(2).replace(",", ""))), m.group(1).upper()
+        except ValueError:
+            pass
+
+    # Range that is really an estimate, not a hammer (e.g. GBP60000-80000)
+    m = re.match(
+        r"^(USD|GBP|EUR|CHF|HKD)\s*([\d,]+)\s*[-–—]\s*([\d,]+)\s*$",
+        raw,
+        re.I,
+    )
+    if m:
+        # Not a single realised price
+        return None, m.group(1).upper()
+
     # Sold for £7,500 / Lot sold: 63,000 GBP / PRICE REALISED: £28,840
     patterns = [
         r"(?:sold\s+for|lot\s+sold|price\s+realised|price\s+realized|realised|realized)\s*[: ]*\s*(US\$|HK\$|£|€|\$|CHF)?\s*([\d,]+(?:\.\d+)?)\s*(GBP|USD|EUR|CHF|HKD)?",
         r"(US\$|HK\$|£|€|\$)\s*([\d,]+(?:\.\d+)?)",
+        r"\b(USD|GBP|EUR|CHF|HKD)\s*([\d,]+(?:\.\d+)?)",
     ]
     for pat in patterns:
-        m = re.search(pat, text, re.I)
+        m = re.search(pat, raw, re.I)
         if not m:
             continue
         groups = m.groups()
-        sym = ""
-        amount_s = None
-        code = ""
-        if len(groups) >= 3:
-            sym = (groups[0] or "").upper()
-            amount_s = groups[1]
-            code = (groups[2] or "").upper()
-        else:
-            sym = (groups[0] or "").upper()
-            amount_s = groups[1]
+        sym = (groups[0] or "").upper() if groups[0] else ""
+        amount_s = groups[1]
+        code = (groups[2] or "").upper() if len(groups) > 2 and groups[2] else ""
         try:
             amount = int(float(amount_s.replace(",", "")))
         except (ValueError, AttributeError):
@@ -198,18 +223,52 @@ def parse_sold_price(text: str) -> tuple:
             cur = code
         elif sym in ("£",):
             cur = "GBP"
-        elif sym in ("$", "US$"):
+        elif sym in ("$", "US$", "USD"):
             cur = "USD"
-        elif sym in ("€",):
+        elif sym in ("€", "EUR"):
             cur = "EUR"
         elif "HK" in sym:
             cur = "HKD"
         elif "CHF" in sym:
             cur = "CHF"
+        elif sym == "GBP":
+            cur = "GBP"
         else:
             cur = "GBP"
         return amount, cur
     return None, "GBP"
+
+
+def parse_dd_mm_yyyy(date_text: str) -> str:
+    """Parse DD/MM/YYYY (banksy-value) → YYYY-MM-DD."""
+    if not date_text:
+        return ""
+    m = re.match(r"^\s*(\d{1,2})/(\d{1,2})/(\d{4})\s*$", date_text.strip())
+    if not m:
+        return ""
+    d, mo, y = int(m.group(1)), int(m.group(2)), int(m.group(3))
+    try:
+        return datetime(y, mo, d).strftime("%Y-%m-%d")
+    except ValueError:
+        return ""
+
+
+def normalize_house_name(name: str) -> str:
+    """Map free-text house labels to our display names."""
+    key = match_house(name or "")
+    if key:
+        return TRACKED_HOUSES[key]
+    # banksy-value sometimes omits apostrophes
+    cleaned = (name or "").strip()
+    aliases = {
+        "sothebys": "Sotheby's",
+        "christies": "Christie's",
+        "heritage auctions": "Heritage Auctions",
+        "forum auctions": "Forum Auctions",
+        "tate ward": "Tate Ward",
+        "koller auctions": "Koller Auctions",
+    }
+    return aliases.get(cleaned.lower(), cleaned or "Unknown")
 
 
 def parse_auction_date(date_text: str) -> str:
@@ -301,11 +360,14 @@ def is_plausible(lot: dict, mode: str) -> bool:
     major = source in TRACKED_HOUSES or match_house(lot.get("auction_house") or "") in TRACKED_HOUSES
 
     if mode == "completed":
+        # banksy-value is already curated — trust it wholesale
+        if source == "banksyvalue":
+            return bool(title) and len(title) >= 2
         price = lot.get("realised_price")
         if price and price > 0:
             if major or source in TRACKED_HOUSES:
-                return has_known_title(title) or len(title) > 12
-            return has_known_title(title) and price >= 2000
+                return has_known_title(title) or len(title) > 8
+            return has_known_title(title) and price >= 1000
         # Major houses sometimes hide hammer behind login; still list known prints
         # when we have an estimate and a past sale signal.
         if (major or source in TRACKED_HOUSES) and has_known_title(title):
@@ -1095,6 +1157,118 @@ async def scrape_liveauctioneers(pw) -> tuple[list, list]:
 
 
 # ---------------------------------------------------------------------------
+# banksy-value.com realised results (best completed coverage)
+# ---------------------------------------------------------------------------
+
+async def scrape_banksy_value_completed(pw) -> tuple[list, list]:
+    """
+    Parse https://www.banksy-value.com/realised.php
+
+    This is the densest public catalogue of Banksy print (and original) results.
+    We treat it as a curated feed so filters stay permissive.
+    """
+    completed: list = []
+    browser = None
+    try:
+        browser, page = await new_page(pw)
+        url = "https://www.banksy-value.com/realised.php"
+        log.info("banksy-value: %s", url)
+        await page.goto(url, wait_until="domcontentloaded", timeout=60000)
+        await page.wait_for_timeout(3000)
+        for _ in range(18):
+            await page.mouse.wheel(0, 4500)
+            await page.wait_for_timeout(200)
+
+        rows = await page.evaluate(
+            """() => {
+              const out = [];
+              for (const tr of document.querySelectorAll('table tr')) {
+                const cells = [...tr.querySelectorAll('td')].map(td => (td.innerText || '').trim());
+                if (cells.length < 5) continue;
+                // Print name | Auction | Date | Edition | Sold for | Comments
+                out.push({
+                  print_name: cells[0],
+                  auction_house: cells[1],
+                  date: cells[2],
+                  edition: cells[3],
+                  sold: cells[4],
+                  comments: cells[5] || ''
+                });
+              }
+              return out;
+            }"""
+        )
+        log.info("banksy-value: %d table rows", len(rows))
+
+        for row in rows:
+            name = (row.get("print_name") or "").strip()
+            if not name or name.lower() in ("print name", "prints"):
+                continue
+            house_raw = (row.get("auction_house") or "").strip()
+            house = normalize_house_name(house_raw)
+            # Prefer our tracked houses, but keep other named houses from the feed
+            if not house or house.lower() in ("auction", "auction house"):
+                continue
+
+            date = parse_dd_mm_yyyy(row.get("date") or "")
+            if not date:
+                date = parse_auction_date(row.get("date") or "")
+
+            sold_text = (row.get("sold") or "").strip()
+            realised, currency = parse_sold_price(sold_text)
+            low = high = None
+            # Estimate-style ranges in the sold column
+            m = re.match(
+                r"^(USD|GBP|EUR|CHF|HKD)\s*([\d,]+)\s*[-–—]\s*([\d,]+)\s*$",
+                sold_text,
+                re.I,
+            )
+            if m and realised is None:
+                currency = m.group(1).upper()
+                low = int(m.group(2).replace(",", ""))
+                high = int(m.group(3).replace(",", ""))
+
+            edition = (row.get("edition") or "").strip()
+            comments = (row.get("comments") or "").strip()
+            if comments and edition:
+                edition = f"{edition}, {comments}" if comments not in edition else edition
+            elif comments:
+                edition = comments
+
+            # Passed lots: still record with null realised so history is complete
+            is_passed = bool(re.search(r"\bpass(ed)?\b", sold_text, re.I))
+
+            print_name = name if re.search(r"banksy", name, re.I) else f"Banksy - {name}"
+
+            lot = make_lot(
+                source="banksyvalue",
+                print_name=print_name,
+                auction_house=house,
+                auction_date=date,
+                edition=edition,
+                low_estimate=low,
+                high_estimate=high,
+                realised_price=None if is_passed else realised,
+                currency=currency,
+                url="https://www.banksy-value.com/realised.php",
+                image_url="",
+                status="completed",
+                lot_id=f"bv-{stable_id(house, date, name, sold_text, comments)}",
+            )
+            # Keep sold, estimate-only, and passed lots from this curated feed
+            if is_passed or lot.get("realised_price") or lot.get("low_estimate") or is_plausible(lot, "completed"):
+                completed.append(lot)
+
+        log.info("banksy-value: %d completed lots", len(completed))
+    except Exception as e:
+        log.error("banksy-value scrape failed: %s", e)
+    finally:
+        if browser:
+            await browser.close()
+    return [], completed
+
+
+# ---------------------------------------------------------------------------
 # Orchestration
 # ---------------------------------------------------------------------------
 
@@ -1103,6 +1277,8 @@ async def run_all() -> tuple[list, list]:
     completed: list = []
 
     scrapers = [
+        # densest completed feed first
+        ("banksy-value realised", scrape_banksy_value_completed),
         ("Bonhams", scrape_bonhams),
         ("Phillips", scrape_phillips),
         ("Sotheby's", scrape_sothebys),
@@ -1160,8 +1336,13 @@ def main(dry_run: bool = False) -> int:
     if not existing_done.get("lots"):
         existing_done = load_json(MIRROR / "completed.json")
     merged_done = merge_lots(existing_done.get("lots", []), new_done, mode="completed")
-    merged_done = merged_done[:600]
+    # Keep a deep history (banksy-value alone is 250+ rows)
+    merged_done = merged_done[:2500]
     save_pair("completed.json", {"last_updated": now, "lots": merged_done})
+
+    # 2025 coverage snapshot
+    y2025 = [l for l in merged_done if (l.get("auction_date") or "").startswith("2025")]
+    log.info("2025 completed lots: %d", len(y2025))
 
     # House coverage report
     houses_up = {}
