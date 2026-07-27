@@ -1,5 +1,5 @@
 {
-  "last_updated": "2026-07-26T08:12:57Z",
+  "last_updated": "2026-07-27T09:34:14Z",
   "lots": [
     {
       "id": "phillips-8e1d73afeb4c",
@@ -6524,7 +6524,7 @@
       "realised_price": 17500,
       "currency": "GBP",
       "url": "https://www.tateward.com/auction/lot/183a-banksy-british-1974--flying-copper-2003/",
-      "image_url": "https://trumanward.bidpath.cloud/stock/22943-1-medium.jpg?v=63917291911213",
+      "image_url": "",
       "source": "tateward",
       "status": "completed",
       "is_original": true
