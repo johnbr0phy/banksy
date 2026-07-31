@@ -1,5 +1,5 @@
 {
-  "last_updated": "2026-07-30T08:12:18Z",
+  "last_updated": "2026-07-31T08:38:33Z",
   "lots": [
     {
       "id": "phillips-8e1d73afeb4c",
@@ -6444,7 +6444,7 @@
       "realised_price": 106250,
       "currency": "GBP",
       "url": "https://www.tateward.com/auction/lot/187-banksy-british-1974--lenin-on-roller-skates-2003/",
-      "image_url": "https://trumanward.goauction.co.uk/stock/22817-8-medium.jpg?v=63917137928560",
+      "image_url": "",
       "source": "tateward",
       "status": "completed",
       "is_original": true
@@ -6524,7 +6524,7 @@
       "realised_price": 17500,
       "currency": "GBP",
       "url": "https://www.tateward.com/auction/lot/183a-banksy-british-1974--flying-copper-2003/",
-      "image_url": "https://trumanward.goauction.co.uk/stock/22943-1-medium.jpg?v=63917291911213",
+      "image_url": "",
       "source": "tateward",
       "status": "completed",
       "is_original": true
