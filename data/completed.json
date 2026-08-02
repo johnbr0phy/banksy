@@ -1,5 +1,5 @@
 {
-  "last_updated": "2026-08-01T08:08:37Z",
+  "last_updated": "2026-08-02T08:09:46Z",
   "lots": [
     {
       "id": "phillips-8e1d73afeb4c",
@@ -6428,7 +6428,7 @@
       "realised_price": 15000,
       "currency": "GBP",
       "url": "https://www.tateward.com/auction/lot/185-banksy-british-1974--welcome-to-hell/",
-      "image_url": "",
+      "image_url": "https://trumanward.goauction.co.uk/stock/22655-0-medium.jpg?v=63916268423143",
       "source": "tateward",
       "status": "completed",
       "is_original": true
@@ -6476,7 +6476,7 @@
       "realised_price": 20000,
       "currency": "GBP",
       "url": "https://www.tateward.com/auction/lot/184-banksy-british-1974--grannies-2006/",
-      "image_url": "https://trumanward.goauction.co.uk/stock/21823-0-medium.jpg?v=63905278238397",
+      "image_url": "",
       "source": "tateward",
       "status": "completed",
       "is_original": true
@@ -6540,7 +6540,7 @@
       "realised_price": 10000,
       "currency": "GBP",
       "url": "https://www.tateward.com/auction/lot/184-banksy-british-1974--hmv-2003/",
-      "image_url": "https://trumanward.goauction.co.uk/stock/22652-0-medium.jpg?v=63916528001953",
+      "image_url": "",
       "source": "tateward",
       "status": "completed",
       "is_original": true
