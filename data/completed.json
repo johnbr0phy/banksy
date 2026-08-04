@@ -1,5 +1,5 @@
 {
-  "last_updated": "2026-08-03T09:07:10Z",
+  "last_updated": "2026-08-04T08:23:34Z",
   "lots": [
     {
       "id": "phillips-8e1d73afeb4c",
@@ -6428,7 +6428,7 @@
       "realised_price": 15000,
       "currency": "GBP",
       "url": "https://www.tateward.com/auction/lot/185-banksy-british-1974--welcome-to-hell/",
-      "image_url": "https://trumanward.goauction.co.uk/stock/22655-0-medium.jpg?v=63916268423143",
+      "image_url": "",
       "source": "tateward",
       "status": "completed",
       "is_original": true
