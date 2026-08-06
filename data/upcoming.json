@@ -1,4 +1,21 @@
 {
-  "last_updated": "2026-08-05T08:21:04Z",
-  "lots": []
+  "last_updated": "2026-08-06T08:20:12Z",
+  "lots": [
+    {
+      "id": "sothebys-c14ef015ac5d",
+      "print_name": "Banksquiat (Black)",
+      "auction_house": "Sotheby's",
+      "auction_date": "",
+      "edition": "",
+      "low_estimate": null,
+      "high_estimate": null,
+      "realised_price": null,
+      "currency": "GBP",
+      "url": "https://sothebys.com/en/buy/_banksquiat-black-4eed",
+      "image_url": "",
+      "source": "sothebys",
+      "status": "upcoming",
+      "is_original": true
+    }
+  ]
 }
