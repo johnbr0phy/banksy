@@ -1,5 +1,5 @@
 {
-  "last_updated": "2026-08-11T06:52:28Z",
+  "last_updated": "2026-08-12T07:13:17Z",
   "lots": [
     {
       "id": "phillips-8e1d73afeb4c",
@@ -6428,7 +6428,7 @@
       "realised_price": 15000,
       "currency": "GBP",
       "url": "https://www.tateward.com/auction/lot/185-banksy-british-1974--welcome-to-hell/",
-      "image_url": "",
+      "image_url": "https://trumanward.goauction.co.uk/stock/22655-0-medium.jpg?v=63916268423143",
       "source": "tateward",
       "status": "completed",
       "is_original": true
@@ -6492,7 +6492,7 @@
       "realised_price": 7500,
       "currency": "GBP",
       "url": "https://www.tateward.com/auction/lot/169a-banksy-british-1974--toxic-mary-2004/",
-      "image_url": "https://trumanward.goauction.co.uk/stock/22213-0-medium.jpg?v=63907703789300",
+      "image_url": "",
       "source": "tateward",
       "status": "completed",
       "is_original": true
@@ -6508,7 +6508,7 @@
       "realised_price": 18750,
       "currency": "GBP",
       "url": "https://www.tateward.com/auction/lot/186-banksy-british-1974--laugh-now-2004/",
-      "image_url": "",
+      "image_url": "https://trumanward.goauction.co.uk/stock/22649-0-medium.jpg?v=63916268386300",
       "source": "tateward",
       "status": "completed",
       "is_original": true
