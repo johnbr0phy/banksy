@@ -1,5 +1,5 @@
 {
-  "last_updated": "2026-08-12T07:13:17Z",
+  "last_updated": "2026-08-13T07:16:47Z",
   "lots": [
     {
       "id": "phillips-8e1d73afeb4c",
@@ -6428,7 +6428,7 @@
       "realised_price": 15000,
       "currency": "GBP",
       "url": "https://www.tateward.com/auction/lot/185-banksy-british-1974--welcome-to-hell/",
-      "image_url": "https://trumanward.goauction.co.uk/stock/22655-0-medium.jpg?v=63916268423143",
+      "image_url": "",
       "source": "tateward",
       "status": "completed",
       "is_original": true
@@ -6460,23 +6460,7 @@
       "realised_price": 8750,
       "currency": "GBP",
       "url": "https://www.tateward.com/auction/lot/183-banksy-british-1974--queen-victoria-2003/",
-      "image_url": "",
-      "source": "tateward",
-      "status": "completed",
-      "is_original": true
-    },
-    {
-      "id": "tateward-a4336fa05b90",
-      "print_name": "Estimated at £15,000 - £20,000",
-      "auction_house": "Tate Ward",
-      "auction_date": "",
-      "edition": "",
-      "low_estimate": 15000,
-      "high_estimate": 20000,
-      "realised_price": 20000,
-      "currency": "GBP",
-      "url": "https://www.tateward.com/auction/lot/184-banksy-british-1974--grannies-2006/",
-      "image_url": "",
+      "image_url": "https://trumanward.goauction.co.uk/stock/22666-0-medium.jpg?v=63915897475453",
       "source": "tateward",
       "status": "completed",
       "is_original": true
@@ -6508,7 +6492,7 @@
       "realised_price": 18750,
       "currency": "GBP",
       "url": "https://www.tateward.com/auction/lot/186-banksy-british-1974--laugh-now-2004/",
-      "image_url": "https://trumanward.goauction.co.uk/stock/22649-0-medium.jpg?v=63916268386300",
+      "image_url": "",
       "source": "tateward",
       "status": "completed",
       "is_original": true
@@ -6524,7 +6508,7 @@
       "realised_price": 17500,
       "currency": "GBP",
       "url": "https://www.tateward.com/auction/lot/183a-banksy-british-1974--flying-copper-2003/",
-      "image_url": "",
+      "image_url": "https://trumanward.goauction.co.uk/stock/22943-1-medium.jpg?v=63917291911213",
       "source": "tateward",
       "status": "completed",
       "is_original": true
