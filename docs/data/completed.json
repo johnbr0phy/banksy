@@ -1,5 +1,5 @@
 {
-  "last_updated": "2026-08-13T07:16:47Z",
+  "last_updated": "2026-08-14T07:13:20Z",
   "lots": [
     {
       "id": "phillips-8e1d73afeb4c",
@@ -6460,7 +6460,7 @@
       "realised_price": 8750,
       "currency": "GBP",
       "url": "https://www.tateward.com/auction/lot/183-banksy-british-1974--queen-victoria-2003/",
-      "image_url": "https://trumanward.goauction.co.uk/stock/22666-0-medium.jpg?v=63915897475453",
+      "image_url": "",
       "source": "tateward",
       "status": "completed",
       "is_original": true
@@ -6508,7 +6508,7 @@
       "realised_price": 17500,
       "currency": "GBP",
       "url": "https://www.tateward.com/auction/lot/183a-banksy-british-1974--flying-copper-2003/",
-      "image_url": "https://trumanward.goauction.co.uk/stock/22943-1-medium.jpg?v=63917291911213",
+      "image_url": "",
       "source": "tateward",
       "status": "completed",
       "is_original": true
@@ -6542,6 +6542,22 @@
       "url": "https://www.roseberys.co.uk/bidding/A0777-prints-multiples-657/405-banksybritish-b1974-jack-and-jill-2005screenprint-on-613602",
       "image_url": "https://am-s3-bucket-assets.s3.eu-west-2.amazonaws.com/roseberys/prod/lot_images/medium/8fb64eb8-0513-f111-8405-6045bdd1fa9a/5435b851-f81d-f111-8340-7c1e5266026b.webp",
       "source": "roseberys",
+      "status": "completed",
+      "is_original": true
+    },
+    {
+      "id": "tateward-3a0feabe8401",
+      "print_name": "Estimated at £7,000 - £9,000",
+      "auction_house": "Tate Ward",
+      "auction_date": "",
+      "edition": "",
+      "low_estimate": 7000,
+      "high_estimate": 9000,
+      "realised_price": 10625,
+      "currency": "GBP",
+      "url": "https://www.tateward.com/auction/lot/24-banksy-british-1974--monkey-queen-2003/",
+      "image_url": "",
+      "source": "tateward",
       "status": "completed",
       "is_original": true
     }
