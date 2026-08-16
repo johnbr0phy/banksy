@@ -1,5 +1,5 @@
 {
-  "last_updated": "2026-08-15T06:25:44Z",
+  "last_updated": "2026-08-16T06:27:48Z",
   "lots": [
     {
       "id": "phillips-8e1d73afeb4c",
@@ -6460,7 +6460,7 @@
       "realised_price": 8750,
       "currency": "GBP",
       "url": "https://www.tateward.com/auction/lot/183-banksy-british-1974--queen-victoria-2003/",
-      "image_url": "",
+      "image_url": "https://trumanward.goauction.co.uk/stock/22666-0-medium.jpg?v=63915897475453",
       "source": "tateward",
       "status": "completed",
       "is_original": true
@@ -6524,7 +6524,7 @@
       "realised_price": 10000,
       "currency": "GBP",
       "url": "https://www.tateward.com/auction/lot/184-banksy-british-1974--hmv-2003/",
-      "image_url": "https://trumanward.goauction.co.uk/stock/22652-0-medium.jpg?v=63916528001953",
+      "image_url": "",
       "source": "tateward",
       "status": "completed",
       "is_original": true
