@@ -1,5 +1,5 @@
 {
-  "last_updated": "2026-08-19T06:32:56Z",
+  "last_updated": "2026-08-20T06:32:28Z",
   "lots": [
     {
       "id": "phillips-8e1d73afeb4c",
@@ -6556,7 +6556,7 @@
       "realised_price": 10625,
       "currency": "GBP",
       "url": "https://www.tateward.com/auction/lot/24-banksy-british-1974--monkey-queen-2003/",
-      "image_url": "https://trumanward.goauction.co.uk/stock/23145-2-medium.jpg?v=63920827465203",
+      "image_url": "",
       "source": "tateward",
       "status": "completed",
       "is_original": true
