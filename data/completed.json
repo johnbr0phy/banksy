@@ -1,5 +1,5 @@
 {
-  "last_updated": "2026-08-29T12:02:12Z",
+  "last_updated": "2026-08-30T10:59:29Z",
   "lots": [
     {
       "id": "phillips-8e1d73afeb4c",
@@ -6428,7 +6428,7 @@
       "realised_price": 15000,
       "currency": "GBP",
       "url": "https://www.tateward.com/auction/lot/185-banksy-british-1974--welcome-to-hell/",
-      "image_url": "",
+      "image_url": "https://trumanward.goauction.co.uk/stock/22655-0-small.jpg?v=63916268423143",
       "source": "tateward",
       "status": "completed",
       "is_original": true
@@ -6444,7 +6444,7 @@
       "realised_price": 106250,
       "currency": "GBP",
       "url": "https://www.tateward.com/auction/lot/187-banksy-british-1974--lenin-on-roller-skates-2003/",
-      "image_url": "",
+      "image_url": "https://trumanward.goauction.co.uk/stock/22817-8-small.jpg?v=63917137928560",
       "source": "tateward",
       "status": "completed",
       "is_original": true
@@ -6476,7 +6476,7 @@
       "realised_price": 7500,
       "currency": "GBP",
       "url": "https://www.tateward.com/auction/lot/169a-banksy-british-1974--toxic-mary-2004/",
-      "image_url": "https://trumanward.goauction.co.uk/stock/22213-0-small.jpg?v=63907703789300",
+      "image_url": "",
       "source": "tateward",
       "status": "completed",
       "is_original": true
@@ -6508,7 +6508,7 @@
       "realised_price": 17500,
       "currency": "GBP",
       "url": "https://www.tateward.com/auction/lot/183a-banksy-british-1974--flying-copper-2003/",
-      "image_url": "https://trumanward.goauction.co.uk/stock/22943-1-small.jpg?v=63917291911213",
+      "image_url": "",
       "source": "tateward",
       "status": "completed",
       "is_original": true
@@ -6524,7 +6524,7 @@
       "realised_price": 10000,
       "currency": "GBP",
       "url": "https://www.tateward.com/auction/lot/184-banksy-british-1974--hmv-2003/",
-      "image_url": "https://trumanward.goauction.co.uk/stock/22652-0-small.jpg?v=63916528001953",
+      "image_url": "",
       "source": "tateward",
       "status": "completed",
       "is_original": true
