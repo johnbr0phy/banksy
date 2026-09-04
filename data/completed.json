@@ -1,5 +1,5 @@
 {
-  "last_updated": "2026-09-03T10:26:15Z",
+  "last_updated": "2026-09-04T10:14:59Z",
   "lots": [
     {
       "id": "phillips-8e1d73afeb4c",
@@ -124,7 +124,7 @@
       "realised_price": 9675,
       "currency": "GBP",
       "url": "https://www.phillips.com/detail/banksy/235780",
-      "image_url": "https://dist.phillips.com/auction-assets/UK030226/235780_001.jpg?bg-color=ffffff&pad=0&fit=bounds&height=550&optimize=medium&width=605",
+      "image_url": "",
       "source": "phillips",
       "status": "completed",
       "is_original": true
@@ -140,7 +140,7 @@
       "realised_price": 19350,
       "currency": "GBP",
       "url": "https://www.phillips.com/detail/banksy/230944",
-      "image_url": "https://dist.phillips.com/auction-assets/UK030226/230944_001.jpg?bg-color=ffffff&pad=0&fit=bounds&height=550&optimize=medium&width=605",
+      "image_url": "",
       "source": "phillips",
       "status": "completed",
       "is_original": true
@@ -156,7 +156,7 @@
       "realised_price": 116100,
       "currency": "GBP",
       "url": "https://www.phillips.com/detail/banksy/235727",
-      "image_url": "https://dist.phillips.com/auction-assets/UK030226/235727_001.jpg?bg-color=ffffff&pad=0&fit=bounds&height=550&optimize=medium&width=605",
+      "image_url": "",
       "source": "phillips",
       "status": "completed",
       "is_original": true
@@ -172,7 +172,7 @@
       "realised_price": 24510,
       "currency": "GBP",
       "url": "https://www.phillips.com/detail/banksy/231920",
-      "image_url": "https://dist.phillips.com/auction-assets/UK030226/231920_001.jpg?bg-color=ffffff&pad=0&fit=bounds&height=550&optimize=medium&width=605",
+      "image_url": "",
       "source": "phillips",
       "status": "completed",
       "is_original": true
@@ -348,7 +348,7 @@
       "realised_price": 23220,
       "currency": "GBP",
       "url": "https://www.phillips.com/detail/banksy/228705",
-      "image_url": "",
+      "image_url": "https://dist.phillips.com/auction-assets/UK030126/228705_001.jpg?bg-color=ffffff&pad=0&fit=bounds&height=550&optimize=medium&width=605",
       "source": "phillips",
       "status": "completed",
       "is_original": true
@@ -380,7 +380,7 @@
       "realised_price": 30960,
       "currency": "GBP",
       "url": "https://www.phillips.com/detail/banksy/228412",
-      "image_url": "",
+      "image_url": "https://dist.phillips.com/auction-assets/UK010725/228412_001.jpg?bg-color=ffffff&pad=0&fit=bounds&height=550&optimize=medium&width=605",
       "source": "phillips",
       "status": "completed",
       "is_original": true
@@ -620,7 +620,7 @@
       "realised_price": 82550,
       "currency": "GBP",
       "url": "https://www.phillips.com/detail/banksy/217709",
-      "image_url": "https://dist.phillips.com/auction-assets/UK030225/217709_001.jpg?bg-color=ffffff&pad=0&fit=bounds&height=550&optimize=medium&width=605",
+      "image_url": "",
       "source": "phillips",
       "status": "completed",
       "is_original": true
@@ -636,7 +636,7 @@
       "realised_price": 24130,
       "currency": "GBP",
       "url": "https://www.phillips.com/detail/banksy/218168",
-      "image_url": "https://dist.phillips.com/auction-assets/UK030225/218168_001.jpg?bg-color=ffffff&pad=0&fit=bounds&height=550&optimize=medium&width=605",
+      "image_url": "",
       "source": "phillips",
       "status": "completed",
       "is_original": true
@@ -652,7 +652,7 @@
       "realised_price": 107950,
       "currency": "GBP",
       "url": "https://www.phillips.com/detail/banksy/217708",
-      "image_url": "https://dist.phillips.com/auction-assets/UK030225/217708_001.jpg?bg-color=ffffff&pad=0&fit=bounds&height=550&optimize=medium&width=605",
+      "image_url": "",
       "source": "phillips",
       "status": "completed",
       "is_original": true
@@ -668,7 +668,7 @@
       "realised_price": 25400,
       "currency": "GBP",
       "url": "https://www.phillips.com/detail/banksy/217710",
-      "image_url": "https://dist.phillips.com/auction-assets/UK030225/217710_001.jpg?bg-color=ffffff&pad=0&fit=bounds&height=550&optimize=medium&width=605",
+      "image_url": "",
       "source": "phillips",
       "status": "completed",
       "is_original": true
@@ -3116,7 +3116,7 @@
       "realised_price": 82550,
       "currency": "GBP",
       "url": "https://www.phillips.com/detail/banksy/209842",
-      "image_url": "",
+      "image_url": "https://dist.phillips.com/auction-assets/UK010624/209842_001.jpg?bg-color=ffffff&pad=0&fit=bounds&height=550&optimize=medium&width=605",
       "source": "phillips",
       "status": "completed",
       "is_original": true
@@ -4092,7 +4092,7 @@
       "realised_price": 101600,
       "currency": "GBP",
       "url": "https://www.phillips.com/detail/banksy/208470",
-      "image_url": "https://dist.phillips.com/auction-assets/UK030424/208470_001.jpg?bg-color=ffffff&pad=0&fit=bounds&height=550&optimize=medium&width=605",
+      "image_url": "",
       "source": "phillips",
       "status": "completed",
       "is_original": true
@@ -4108,7 +4108,7 @@
       "realised_price": 12700,
       "currency": "GBP",
       "url": "https://www.phillips.com/detail/banksy/202761",
-      "image_url": "https://dist.phillips.com/auction-assets/UK030424/202761_001.jpg?bg-color=ffffff&pad=0&fit=bounds&height=550&optimize=medium&width=605",
+      "image_url": "",
       "source": "phillips",
       "status": "completed",
       "is_original": true
@@ -4124,7 +4124,7 @@
       "realised_price": 21590,
       "currency": "GBP",
       "url": "https://www.phillips.com/detail/banksy/209743",
-      "image_url": "https://dist.phillips.com/auction-assets/UK030424/209743_001.jpg?bg-color=ffffff&pad=0&fit=bounds&height=550&optimize=medium&width=605",
+      "image_url": "",
       "source": "phillips",
       "status": "completed",
       "is_original": true
@@ -5020,7 +5020,7 @@
       "realised_price": 30480,
       "currency": "GBP",
       "url": "https://www.phillips.com/detail/banksy/202639",
-      "image_url": "https://dist.phillips.com/auction-assets/UK030324/202639_001.jpg?bg-color=ffffff&pad=0&fit=bounds&height=550&optimize=medium&width=605",
+      "image_url": "",
       "source": "phillips",
       "status": "completed",
       "is_original": true
@@ -5436,7 +5436,7 @@
       "realised_price": 60960,
       "currency": "GBP",
       "url": "https://www.phillips.com/detail/banksy/188514",
-      "image_url": "",
+      "image_url": "https://dist.phillips.com/auction-assets/UK010323/188514_001.jpg?bg-color=ffffff&pad=0&fit=bounds&height=550&optimize=medium&width=605",
       "source": "phillips",
       "status": "completed",
       "is_original": true
@@ -5452,7 +5452,7 @@
       "realised_price": 44450,
       "currency": "USD",
       "url": "https://www.phillips.com/detail/banksy/183370",
-      "image_url": "",
+      "image_url": "https://dist.phillips.com/auction-assets/NY030323/183370_001.jpg?bg-color=ffffff&pad=0&fit=bounds&height=550&optimize=medium&width=605",
       "source": "phillips",
       "status": "completed",
       "is_original": true
@@ -6444,7 +6444,7 @@
       "realised_price": 106250,
       "currency": "GBP",
       "url": "https://www.tateward.com/auction/lot/187-banksy-british-1974--lenin-on-roller-skates-2003/",
-      "image_url": "",
+      "image_url": "https://trumanward.goauction.co.uk/stock/22817-8-small.jpg?v=63917137928560",
       "source": "tateward",
       "status": "completed",
       "is_original": true
@@ -6476,7 +6476,7 @@
       "realised_price": 7500,
       "currency": "GBP",
       "url": "https://www.tateward.com/auction/lot/169a-banksy-british-1974--toxic-mary-2004/",
-      "image_url": "",
+      "image_url": "https://trumanward.goauction.co.uk/stock/22213-0-small.jpg?v=63907703789300",
       "source": "tateward",
       "status": "completed",
       "is_original": true
@@ -6492,7 +6492,7 @@
       "realised_price": 18750,
       "currency": "GBP",
       "url": "https://www.tateward.com/auction/lot/186-banksy-british-1974--laugh-now-2004/",
-      "image_url": "https://trumanward.goauction.co.uk/stock/22649-0-small.jpg?v=63916268386300",
+      "image_url": "",
       "source": "tateward",
       "status": "completed",
       "is_original": true
@@ -6524,7 +6524,7 @@
       "realised_price": 10000,
       "currency": "GBP",
       "url": "https://www.tateward.com/auction/lot/184-banksy-british-1974--hmv-2003/",
-      "image_url": "https://trumanward.goauction.co.uk/stock/22652-0-small.jpg?v=63916528001953",
+      "image_url": "",
       "source": "tateward",
       "status": "completed",
       "is_original": true
