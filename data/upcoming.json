@@ -1,5 +1,5 @@
 {
-  "last_updated": "2026-09-04T10:14:59Z",
+  "last_updated": "2026-09-05T09:47:11Z",
   "lots": [
     {
       "id": "phillips-ecb3236ca2c5",
@@ -62,22 +62,6 @@
       "url": "https://www.phillips.com/detail/banksy/238545",
       "image_url": "https://dist.phillips.com/auction-assets/UK030326/238545_001.jpg?bg-color=ffffff&pad=0&fit=bounds&height=550&optimize=medium&width=605",
       "source": "phillips",
-      "status": "upcoming",
-      "is_original": true
-    },
-    {
-      "id": "sothebys-c14ef015ac5d",
-      "print_name": "Banksquiat (Black)",
-      "auction_house": "Sotheby's",
-      "auction_date": "",
-      "edition": "",
-      "low_estimate": null,
-      "high_estimate": null,
-      "realised_price": null,
-      "currency": "GBP",
-      "url": "https://sothebys.com/en/buy/_banksquiat-black-4eed",
-      "image_url": "",
-      "source": "sothebys",
       "status": "upcoming",
       "is_original": true
     },
