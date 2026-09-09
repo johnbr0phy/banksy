@@ -1,5 +1,5 @@
 {
-  "last_updated": "2026-09-08T10:22:46Z",
+  "last_updated": "2026-09-09T10:27:40Z",
   "lots": [
     {
       "id": "phillips-8e1d73afeb4c",
@@ -76,6 +76,22 @@
       "realised_price": 35840,
       "currency": "GBP",
       "url": "https://www.sothebys.com/en/buy/auction/2026/prints-multiples/napalm-cant-beat-that-feeling-from-in-the-darkest",
+      "image_url": "",
+      "source": "sothebys",
+      "status": "completed",
+      "is_original": true
+    },
+    {
+      "id": "sothebys-6ab08e93b885",
+      "print_name": "Girl with Balloon",
+      "auction_house": "Sotheby's",
+      "auction_date": "2026-06-15",
+      "edition": "",
+      "low_estimate": 120000,
+      "high_estimate": 180000,
+      "realised_price": null,
+      "currency": "GBP",
+      "url": "https://www.sothebys.com/en/buy/auction/2026/prints-multiples-l26161/girl-with-balloon",
       "image_url": "",
       "source": "sothebys",
       "status": "completed",
@@ -6460,7 +6476,7 @@
       "realised_price": 8750,
       "currency": "GBP",
       "url": "https://www.tateward.com/auction/lot/183-banksy-british-1974--queen-victoria-2003/",
-      "image_url": "",
+      "image_url": "https://trumanward.goauction.co.uk/stock/22666-0-small.jpg?v=63915897475453",
       "source": "tateward",
       "status": "completed",
       "is_original": true
@@ -6476,7 +6492,7 @@
       "realised_price": 7500,
       "currency": "GBP",
       "url": "https://www.tateward.com/auction/lot/169a-banksy-british-1974--toxic-mary-2004/",
-      "image_url": "https://trumanward.goauction.co.uk/stock/22213-0-small.jpg?v=63907703789300",
+      "image_url": "",
       "source": "tateward",
       "status": "completed",
       "is_original": true
