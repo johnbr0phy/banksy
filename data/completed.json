@@ -1,5 +1,5 @@
 {
-  "last_updated": "2026-09-14T11:19:14Z",
+  "last_updated": "2026-09-15T10:46:59Z",
   "lots": [
     {
       "id": "phillips-8e1d73afeb4c",
@@ -188,6 +188,22 @@
       "realised_price": null,
       "currency": "GBP",
       "url": "https://www.sothebys.com/en/buy/auction/2026/prints-multiples-l26161/banksquiat-black",
+      "image_url": "",
+      "source": "sothebys",
+      "status": "completed",
+      "is_original": true
+    },
+    {
+      "id": "sothebys-5f57b22fc6bb",
+      "print_name": "Happy Chopper",
+      "auction_house": "Sotheby's",
+      "auction_date": "2026-06-15",
+      "edition": "",
+      "low_estimate": 10000,
+      "high_estimate": 15000,
+      "realised_price": null,
+      "currency": "GBP",
+      "url": "https://www.sothebys.com/en/buy/auction/2026/prints-multiples-l26161/happy-chopper",
       "image_url": "",
       "source": "sothebys",
       "status": "completed",
@@ -6588,7 +6604,7 @@
       "realised_price": 7500,
       "currency": "GBP",
       "url": "https://www.tateward.com/auction/lot/169a-banksy-british-1974--toxic-mary-2004/",
-      "image_url": "",
+      "image_url": "https://trumanward.goauction.co.uk/stock/22213-0-small.jpg?v=63907703789300",
       "source": "tateward",
       "status": "completed",
       "is_original": true
@@ -6636,7 +6652,7 @@
       "realised_price": 10000,
       "currency": "GBP",
       "url": "https://www.tateward.com/auction/lot/184-banksy-british-1974--hmv-2003/",
-      "image_url": "",
+      "image_url": "https://trumanward.goauction.co.uk/stock/22652-0-small.jpg?v=63916528001953",
       "source": "tateward",
       "status": "completed",
       "is_original": true
@@ -6668,7 +6684,7 @@
       "realised_price": 10625,
       "currency": "GBP",
       "url": "https://www.tateward.com/auction/lot/24-banksy-british-1974--monkey-queen-2003/",
-      "image_url": "https://trumanward.goauction.co.uk/stock/23145-2-small.jpg?v=63920827465203",
+      "image_url": "",
       "source": "tateward",
       "status": "completed",
       "is_original": true
