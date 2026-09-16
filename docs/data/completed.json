@@ -1,5 +1,5 @@
 {
-  "last_updated": "2026-09-15T10:46:59Z",
+  "last_updated": "2026-09-16T10:35:23Z",
   "lots": [
     {
       "id": "phillips-8e1d73afeb4c",
@@ -131,7 +131,7 @@
     },
     {
       "id": "sothebys-44e32507f9d6",
-      "print_name": "Barely Legal",
+      "print_name": "Barely Legal (LA Set)",
       "auction_house": "Sotheby's",
       "auction_date": "2026-06-15",
       "edition": "",
@@ -6546,22 +6546,6 @@
       "is_original": true
     },
     {
-      "id": "tateward-2870e7f28f64",
-      "print_name": "Estimated at £8,000 - £12,000",
-      "auction_house": "Tate Ward",
-      "auction_date": "",
-      "edition": "",
-      "low_estimate": 8000,
-      "high_estimate": 12000,
-      "realised_price": 15000,
-      "currency": "GBP",
-      "url": "https://www.tateward.com/auction/lot/185-banksy-british-1974--welcome-to-hell/",
-      "image_url": "",
-      "source": "tateward",
-      "status": "completed",
-      "is_original": true
-    },
-    {
       "id": "tateward-2f075aabb5a8",
       "print_name": "Estimated at £80,000 - £120,000",
       "auction_house": "Tate Ward",
@@ -6572,55 +6556,7 @@
       "realised_price": 106250,
       "currency": "GBP",
       "url": "https://www.tateward.com/auction/lot/187-banksy-british-1974--lenin-on-roller-skates-2003/",
-      "image_url": "",
-      "source": "tateward",
-      "status": "completed",
-      "is_original": true
-    },
-    {
-      "id": "tateward-ce0dcff3ad4a",
-      "print_name": "Estimated at £7,000 - £9,000",
-      "auction_house": "Tate Ward",
-      "auction_date": "",
-      "edition": "",
-      "low_estimate": 7000,
-      "high_estimate": 9000,
-      "realised_price": 8750,
-      "currency": "GBP",
-      "url": "https://www.tateward.com/auction/lot/183-banksy-british-1974--queen-victoria-2003/",
-      "image_url": "",
-      "source": "tateward",
-      "status": "completed",
-      "is_original": true
-    },
-    {
-      "id": "tateward-13701179b2c6",
-      "print_name": "Estimated at £6,000 - £8,000",
-      "auction_house": "Tate Ward",
-      "auction_date": "",
-      "edition": "",
-      "low_estimate": 6000,
-      "high_estimate": 8000,
-      "realised_price": 7500,
-      "currency": "GBP",
-      "url": "https://www.tateward.com/auction/lot/169a-banksy-british-1974--toxic-mary-2004/",
-      "image_url": "https://trumanward.goauction.co.uk/stock/22213-0-small.jpg?v=63907703789300",
-      "source": "tateward",
-      "status": "completed",
-      "is_original": true
-    },
-    {
-      "id": "tateward-ec20faf87c37",
-      "print_name": "Estimated at £12,000 - £16,000",
-      "auction_house": "Tate Ward",
-      "auction_date": "",
-      "edition": "",
-      "low_estimate": 12000,
-      "high_estimate": 16000,
-      "realised_price": 18750,
-      "currency": "GBP",
-      "url": "https://www.tateward.com/auction/lot/186-banksy-british-1974--laugh-now-2004/",
-      "image_url": "",
+      "image_url": "https://trumanward.goauction.co.uk/stock/22817-8-small.jpg?v=63917137928560",
       "source": "tateward",
       "status": "completed",
       "is_original": true
@@ -6636,23 +6572,7 @@
       "realised_price": 17500,
       "currency": "GBP",
       "url": "https://www.tateward.com/auction/lot/183a-banksy-british-1974--flying-copper-2003/",
-      "image_url": "",
-      "source": "tateward",
-      "status": "completed",
-      "is_original": true
-    },
-    {
-      "id": "tateward-1b96ed26c0b6",
-      "print_name": "Estimated at £8,000 - £12,000",
-      "auction_house": "Tate Ward",
-      "auction_date": "",
-      "edition": "",
-      "low_estimate": 8000,
-      "high_estimate": 12000,
-      "realised_price": 10000,
-      "currency": "GBP",
-      "url": "https://www.tateward.com/auction/lot/184-banksy-british-1974--hmv-2003/",
-      "image_url": "https://trumanward.goauction.co.uk/stock/22652-0-small.jpg?v=63916528001953",
+      "image_url": "https://trumanward.goauction.co.uk/stock/22943-1-small.jpg?v=63917291911213",
       "source": "tateward",
       "status": "completed",
       "is_original": true
@@ -6670,22 +6590,6 @@
       "url": "https://www.roseberys.co.uk/bidding/A0777-prints-multiples-657/405-banksybritish-b1974-jack-and-jill-2005screenprint-on-613602",
       "image_url": "https://am-s3-bucket-assets.s3.eu-west-2.amazonaws.com/roseberys/prod/lot_images/medium/8fb64eb8-0513-f111-8405-6045bdd1fa9a/5435b851-f81d-f111-8340-7c1e5266026b.webp",
       "source": "roseberys",
-      "status": "completed",
-      "is_original": true
-    },
-    {
-      "id": "tateward-3a0feabe8401",
-      "print_name": "Estimated at £7,000 - £9,000",
-      "auction_house": "Tate Ward",
-      "auction_date": "",
-      "edition": "",
-      "low_estimate": 7000,
-      "high_estimate": 9000,
-      "realised_price": 10625,
-      "currency": "GBP",
-      "url": "https://www.tateward.com/auction/lot/24-banksy-british-1974--monkey-queen-2003/",
-      "image_url": "",
-      "source": "tateward",
       "status": "completed",
       "is_original": true
     }

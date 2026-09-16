@@ -1,5 +1,5 @@
 {
-  "last_updated": "2026-09-15T10:46:59Z",
+  "last_updated": "2026-09-16T10:35:23Z",
   "lots": [
     {
       "id": "phillips-ecb3236ca2c5",
@@ -109,22 +109,6 @@
       "currency": "GBP",
       "url": "https://www.invaluable.com/auction-lot/banksy-british-1974-girl-with-balloon-2004-163-c-c30e44d501",
       "image_url": "https://image.invaluable.com/housePhotos/TrumanWard/91/818491/H21746-LHkibtr3lFTQ7A.jpg",
-      "source": "tateward",
-      "status": "upcoming",
-      "is_original": true
-    },
-    {
-      "id": "tateward-inv-057204b28cfe",
-      "print_name": "Trolleys (Colour)",
-      "auction_house": "Tate Ward",
-      "auction_date": "",
-      "edition": "",
-      "low_estimate": 15000,
-      "high_estimate": 20000,
-      "realised_price": null,
-      "currency": "GBP",
-      "url": "https://www.invaluable.com/auction-lot/banksy-british-1974-'trolleys-colour-2007-162-c-b5a5a881aa",
-      "image_url": "https://image.invaluable.com/housePhotos/TrumanWard/91/818491/H21746-LjyJ9wTSj3S6VY.jpg",
       "source": "tateward",
       "status": "upcoming",
       "is_original": true
