@@ -1,5 +1,5 @@
 {
-  "last_updated": "2026-09-18T10:20:04Z",
+  "last_updated": "2026-09-19T10:01:12Z",
   "lots": [
     {
       "id": "phillips-8e1d73afeb4c",
@@ -6573,22 +6573,6 @@
       "currency": "GBP",
       "url": "https://www.tateward.com/auction/lot/167-banksy-british-1974--pulp-fiction-2004/",
       "image_url": "https://trumanward.goauction.co.uk/stock/23127-0-small.jpg?v=63923164796047",
-      "source": "tateward",
-      "status": "completed",
-      "is_original": true
-    },
-    {
-      "id": "tateward-7b9185e559e1",
-      "print_name": "Estimated at £80,000 - £120,000",
-      "auction_house": "Tate Ward",
-      "auction_date": "",
-      "edition": "",
-      "low_estimate": 80000,
-      "high_estimate": 120000,
-      "realised_price": 97500,
-      "currency": "GBP",
-      "url": "https://www.tateward.com/auction/lot/165-banksy-british-1974--lenin-on-roller-skates-2003/",
-      "image_url": "https://trumanward.goauction.co.uk/stock/23070-0-small.jpg?v=63922664826357",
       "source": "tateward",
       "status": "completed",
       "is_original": true
