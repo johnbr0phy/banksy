@@ -1,5 +1,5 @@
 {
-  "last_updated": "2026-09-20T10:22:44Z",
+  "last_updated": "2026-09-21T11:29:03Z",
   "lots": [
     {
       "id": "phillips-8e1d73afeb4c",
@@ -6562,17 +6562,33 @@
       "is_original": true
     },
     {
-      "id": "tateward-2870e7f28f64",
-      "print_name": "Estimated at £8,000 - £12,000",
+      "id": "tateward-7adad4127da3",
+      "print_name": "Estimated at £10,000 - £15,000",
       "auction_house": "Tate Ward",
       "auction_date": "",
       "edition": "",
-      "low_estimate": 8000,
-      "high_estimate": 12000,
+      "low_estimate": 10000,
+      "high_estimate": 15000,
+      "realised_price": 12500,
+      "currency": "GBP",
+      "url": "https://www.tateward.com/auction/lot/161-banksy-british-1974--gangsta-rat-2004/",
+      "image_url": "https://trumanward.goauction.co.uk/stock/23456-0-small.jpg?v=63923261890090",
+      "source": "tateward",
+      "status": "completed",
+      "is_original": true
+    },
+    {
+      "id": "tateward-1c37b54753ea",
+      "print_name": "Estimated at £12,000 - £14,000",
+      "auction_house": "Tate Ward",
+      "auction_date": "",
+      "edition": "",
+      "low_estimate": 12000,
+      "high_estimate": 14000,
       "realised_price": 15000,
       "currency": "GBP",
-      "url": "https://www.tateward.com/auction/lot/185-banksy-british-1974--welcome-to-hell/",
-      "image_url": "https://trumanward.goauction.co.uk/stock/22655-0-small.jpg?v=63916268423143",
+      "url": "https://www.tateward.com/auction/lot/167-banksy-british-1974--pulp-fiction-2004/",
+      "image_url": "https://trumanward.goauction.co.uk/stock/23127-0-small.jpg?v=63923164796047",
       "source": "tateward",
       "status": "completed",
       "is_original": true
