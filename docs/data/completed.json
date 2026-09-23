@@ -1,5 +1,5 @@
 {
-  "last_updated": "2026-09-22T10:38:50Z",
+  "last_updated": "2026-09-23T10:33:06Z",
   "lots": [
     {
       "id": "phillips-ecb3236ca2c5",
@@ -6606,6 +6606,22 @@
       "url": "https://www.roseberys.co.uk/bidding/A0777-prints-multiples-657/405-banksybritish-b1974-jack-and-jill-2005screenprint-on-613602",
       "image_url": "https://am-s3-bucket-assets.s3.eu-west-2.amazonaws.com/roseberys/prod/lot_images/medium/8fb64eb8-0513-f111-8405-6045bdd1fa9a/5435b851-f81d-f111-8340-7c1e5266026b.webp",
       "source": "roseberys",
+      "status": "completed",
+      "is_original": true
+    },
+    {
+      "id": "tateward-2f075aabb5a8",
+      "print_name": "Estimated at £80,000 - £120,000",
+      "auction_house": "Tate Ward",
+      "auction_date": "",
+      "edition": "",
+      "low_estimate": 80000,
+      "high_estimate": 120000,
+      "realised_price": 106250,
+      "currency": "GBP",
+      "url": "https://www.tateward.com/auction/lot/187-banksy-british-1974--lenin-on-roller-skates-2003/",
+      "image_url": "https://trumanward.goauction.co.uk/stock/22817-8-small.jpg?v=63917137928560",
+      "source": "tateward",
       "status": "completed",
       "is_original": true
     }
