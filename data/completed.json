@@ -1,5 +1,5 @@
 {
-  "last_updated": "2026-09-24T10:50:01Z",
+  "last_updated": "2026-09-25T10:53:10Z",
   "lots": [
     {
       "id": "phillips-ecb3236ca2c5",
@@ -252,6 +252,22 @@
       "realised_price": null,
       "currency": "GBP",
       "url": "https://www.sothebys.com/en/buy/auction/2026/prints-multiples-l26161/happy-chopper",
+      "image_url": "",
+      "source": "sothebys",
+      "status": "completed",
+      "is_original": true
+    },
+    {
+      "id": "sothebys-5b27d3ed2fd8",
+      "print_name": "Kate Moss",
+      "auction_house": "Sotheby's",
+      "auction_date": "2026-06-15",
+      "edition": "",
+      "low_estimate": 100000,
+      "high_estimate": 150000,
+      "realised_price": null,
+      "currency": "USD",
+      "url": "https://www.sothebys.com/en/buy/auction/2026/prints-and-photographs-part-i/kate-moss-gold-apricot-colorway",
       "image_url": "",
       "source": "sothebys",
       "status": "completed",
@@ -6606,6 +6622,22 @@
       "url": "https://www.roseberys.co.uk/bidding/A0777-prints-multiples-657/405-banksybritish-b1974-jack-and-jill-2005screenprint-on-613602",
       "image_url": "https://am-s3-bucket-assets.s3.eu-west-2.amazonaws.com/roseberys/prod/lot_images/medium/8fb64eb8-0513-f111-8405-6045bdd1fa9a/5435b851-f81d-f111-8340-7c1e5266026b.webp",
       "source": "roseberys",
+      "status": "completed",
+      "is_original": true
+    },
+    {
+      "id": "tateward-7b9185e559e1",
+      "print_name": "Estimated at £80,000 - £120,000",
+      "auction_house": "Tate Ward",
+      "auction_date": "",
+      "edition": "",
+      "low_estimate": 80000,
+      "high_estimate": 120000,
+      "realised_price": 97500,
+      "currency": "GBP",
+      "url": "https://www.tateward.com/auction/lot/165-banksy-british-1974--lenin-on-roller-skates-2003/",
+      "image_url": "https://trumanward.goauction.co.uk/stock/23070-0-small.jpg?v=63922664826357",
+      "source": "tateward",
       "status": "completed",
       "is_original": true
     }
