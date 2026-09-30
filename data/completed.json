@@ -1,5 +1,5 @@
 {
-  "last_updated": "2026-09-29T11:52:43Z",
+  "last_updated": "2026-09-30T11:39:40Z",
   "lots": [
     {
       "id": "phillips-ecb3236ca2c5",
@@ -6626,33 +6626,17 @@
       "is_original": true
     },
     {
-      "id": "tateward-7b9185e559e1",
-      "print_name": "Estimated at £80,000 - £120,000",
+      "id": "tateward-ec20faf87c37",
+      "print_name": "Estimated at £12,000 - £16,000",
       "auction_house": "Tate Ward",
       "auction_date": "",
       "edition": "",
-      "low_estimate": 80000,
-      "high_estimate": 120000,
-      "realised_price": 97500,
+      "low_estimate": 12000,
+      "high_estimate": 16000,
+      "realised_price": 18750,
       "currency": "GBP",
-      "url": "https://www.tateward.com/auction/lot/165-banksy-british-1974--lenin-on-roller-skates-2003/",
-      "image_url": "https://trumanward.goauction.co.uk/stock/23070-0-small.jpg?v=63922664826357",
-      "source": "tateward",
-      "status": "completed",
-      "is_original": true
-    },
-    {
-      "id": "tateward-3a0feabe8401",
-      "print_name": "Estimated at £7,000 - £9,000",
-      "auction_house": "Tate Ward",
-      "auction_date": "",
-      "edition": "",
-      "low_estimate": 7000,
-      "high_estimate": 9000,
-      "realised_price": 10625,
-      "currency": "GBP",
-      "url": "https://www.tateward.com/auction/lot/24-banksy-british-1974--monkey-queen-2003/",
-      "image_url": "https://trumanward.goauction.co.uk/stock/23145-2-small.jpg?v=63920827465203",
+      "url": "https://www.tateward.com/auction/lot/186-banksy-british-1974--laugh-now-2004/",
+      "image_url": "https://trumanward.goauction.co.uk/stock/22649-0-small.jpg?v=63916268386300",
       "source": "tateward",
       "status": "completed",
       "is_original": true
