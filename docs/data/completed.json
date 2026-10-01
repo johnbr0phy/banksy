@@ -1,5 +1,5 @@
 {
-  "last_updated": "2026-09-30T11:39:40Z",
+  "last_updated": "2026-10-01T12:07:48Z",
   "lots": [
     {
       "id": "phillips-ecb3236ca2c5",
@@ -316,7 +316,7 @@
       "realised_price": 70950,
       "currency": "GBP",
       "url": "https://www.phillips.com/detail/banksy/235779",
-      "image_url": "https://dist.phillips.com/auction-assets/UK030226/235779_001.jpg?bg-color=ffffff&pad=0&fit=bounds&height=550&optimize=medium&width=605",
+      "image_url": "",
       "source": "phillips",
       "status": "completed",
       "is_original": true
@@ -540,7 +540,7 @@
       "realised_price": 11610,
       "currency": "GBP",
       "url": "https://www.phillips.com/detail/banksy/228388",
-      "image_url": "",
+      "image_url": "https://dist.phillips.com/auction-assets/UK030126/228388_001.jpg?bg-color=ffffff&pad=0&fit=bounds&height=550&optimize=medium&width=605",
       "source": "phillips",
       "status": "completed",
       "is_original": true
@@ -812,7 +812,7 @@
       "realised_price": 27940,
       "currency": "GBP",
       "url": "https://www.phillips.com/detail/banksy/216678",
-      "image_url": "https://dist.phillips.com/auction-assets/UK030225/216678_001.jpg?bg-color=ffffff&pad=0&fit=bounds&height=550&optimize=medium&width=605",
+      "image_url": "",
       "source": "phillips",
       "status": "completed",
       "is_original": true
@@ -3324,7 +3324,7 @@
       "realised_price": 82550,
       "currency": "GBP",
       "url": "https://www.phillips.com/detail/banksy/209842",
-      "image_url": "https://dist.phillips.com/auction-assets/UK010624/209842_001.jpg?bg-color=ffffff&pad=0&fit=bounds&height=550&optimize=medium&width=605",
+      "image_url": "",
       "source": "phillips",
       "status": "completed",
       "is_original": true
@@ -4284,7 +4284,7 @@
       "realised_price": 76200,
       "currency": "GBP",
       "url": "https://www.phillips.com/detail/banksy/209742",
-      "image_url": "https://dist.phillips.com/auction-assets/UK030424/209742_001.jpg?bg-color=ffffff&pad=0&fit=bounds&height=550&optimize=medium&width=605",
+      "image_url": "",
       "source": "phillips",
       "status": "completed",
       "is_original": true
@@ -5628,7 +5628,7 @@
       "realised_price": 53340,
       "currency": "GBP",
       "url": "https://www.phillips.com/detail/banksy/188515",
-      "image_url": "",
+      "image_url": "https://dist.phillips.com/auction-assets/UK010323/188515_001.jpg?bg-color=ffffff&pad=0&fit=bounds&height=550&optimize=medium&width=605",
       "source": "phillips",
       "status": "completed",
       "is_original": true
@@ -6626,17 +6626,33 @@
       "is_original": true
     },
     {
-      "id": "tateward-ec20faf87c37",
-      "print_name": "Estimated at £12,000 - £16,000",
+      "id": "tateward-7adad4127da3",
+      "print_name": "Estimated at £10,000 - £15,000",
       "auction_house": "Tate Ward",
       "auction_date": "",
       "edition": "",
-      "low_estimate": 12000,
-      "high_estimate": 16000,
-      "realised_price": 18750,
+      "low_estimate": 10000,
+      "high_estimate": 15000,
+      "realised_price": 12500,
       "currency": "GBP",
-      "url": "https://www.tateward.com/auction/lot/186-banksy-british-1974--laugh-now-2004/",
-      "image_url": "https://trumanward.goauction.co.uk/stock/22649-0-small.jpg?v=63916268386300",
+      "url": "https://www.tateward.com/auction/lot/161-banksy-british-1974--gangsta-rat-2004/",
+      "image_url": "https://trumanward.goauction.co.uk/stock/23456-0-small.jpg?v=63923261890090",
+      "source": "tateward",
+      "status": "completed",
+      "is_original": true
+    },
+    {
+      "id": "tateward-2870e7f28f64",
+      "print_name": "Estimated at £8,000 - £12,000",
+      "auction_house": "Tate Ward",
+      "auction_date": "",
+      "edition": "",
+      "low_estimate": 8000,
+      "high_estimate": 12000,
+      "realised_price": 15000,
+      "currency": "GBP",
+      "url": "https://www.tateward.com/auction/lot/185-banksy-british-1974--welcome-to-hell/",
+      "image_url": "https://trumanward.goauction.co.uk/stock/22655-0-small.jpg?v=63916268423143",
       "source": "tateward",
       "status": "completed",
       "is_original": true
