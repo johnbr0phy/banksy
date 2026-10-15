@@ -1,5 +1,5 @@
 {
-  "last_updated": "2026-10-14T10:56:32Z",
+  "last_updated": "2026-10-15T10:38:12Z",
   "lots": [
     {
       "id": "bonhams-inv-e28b789385ec",
@@ -13,6 +13,22 @@
       "currency": "GBP",
       "url": "https://www.invaluable.com/auction-lot/banksy-b-1975-laugh-now-painted-in-2001-9-c-eaeae263e5",
       "image_url": "https://image.invaluable.com/housePhotos/Bonhams/80/819980/H22141-LdpSaSINkHjhe6.jpg",
+      "source": "bonhams",
+      "status": "upcoming",
+      "is_original": true
+    },
+    {
+      "id": "bonhams-inv-fdd1fc71967f",
+      "print_name": "Girl with Balloon",
+      "auction_house": "Bonhams",
+      "auction_date": "",
+      "edition": "",
+      "low_estimate": 40000,
+      "high_estimate": 60000,
+      "realised_price": null,
+      "currency": "EUR",
+      "url": "https://www.invaluable.com/auction-lot/banksy-ne-en-1974-girl-with-balloon-2004-serigrap-38-c-3645506134",
+      "image_url": "https://image.invaluable.com/housePhotos/Bonhams/12/820712/H22141-LrmdcdNFBe3U3q.jpg",
       "source": "bonhams",
       "status": "upcoming",
       "is_original": true
