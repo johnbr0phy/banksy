@@ -1,5 +1,5 @@
 {
-  "last_updated": "2026-10-17T09:59:00Z",
+  "last_updated": "2026-10-18T10:11:00Z",
   "lots": [
     {
       "id": "phillips-ecb3236ca2c5",
@@ -6674,17 +6674,17 @@
       "is_original": true
     },
     {
-      "id": "tateward-2f075aabb5a8",
-      "print_name": "Estimated at £80,000 - £120,000",
+      "id": "tateward-ec20faf87c37",
+      "print_name": "Estimated at £12,000 - £16,000",
       "auction_house": "Tate Ward",
       "auction_date": "",
       "edition": "",
-      "low_estimate": 80000,
-      "high_estimate": 120000,
-      "realised_price": 106250,
+      "low_estimate": 12000,
+      "high_estimate": 16000,
+      "realised_price": 18750,
       "currency": "GBP",
-      "url": "https://www.tateward.com/auction/lot/187-banksy-british-1974--lenin-on-roller-skates-2003/",
-      "image_url": "https://trumanward.goauction.co.uk/stock/22817-8-small.jpg?v=63917137928560",
+      "url": "https://www.tateward.com/auction/lot/186-banksy-british-1974--laugh-now-2004/",
+      "image_url": "https://trumanward.goauction.co.uk/stock/22649-0-small.jpg?v=63916268386300",
       "source": "tateward",
       "status": "completed",
       "is_original": true
