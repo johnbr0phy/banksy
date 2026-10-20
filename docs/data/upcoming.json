@@ -1,5 +1,5 @@
 {
-  "last_updated": "2026-10-19T11:36:19Z",
+  "last_updated": "2026-10-20T10:42:51Z",
   "lots": [
     {
       "id": "bonhams-inv-fdd1fc71967f",
@@ -14,6 +14,38 @@
       "url": "https://www.invaluable.com/auction-lot/banksy-ne-en-1974-girl-with-balloon-2004-serigrap-38-c-3645506134",
       "image_url": "https://image.invaluable.com/housePhotos/Bonhams/12/820712/H22141-LrmdcdNFBe3U3q.jpg",
       "source": "bonhams",
+      "status": "upcoming",
+      "is_original": true
+    },
+    {
+      "id": "forum-inv-00386707a42f",
+      "print_name": "Flying Copper",
+      "auction_house": "Forum Auctions",
+      "auction_date": "",
+      "edition": "",
+      "low_estimate": 12000,
+      "high_estimate": 15000,
+      "realised_price": null,
+      "currency": "GBP",
+      "url": "https://www.invaluable.com/auction-lot/banksy-b-1974-flying-copper-6-c-33f2ef6668",
+      "image_url": "https://image.invaluable.com/housePhotos/Forum-Auctions/54/821054/H20198-LKZclRDh09fjOL.jpg",
+      "source": "forum",
+      "status": "upcoming",
+      "is_original": true
+    },
+    {
+      "id": "forum-inv-2a056c934f11",
+      "print_name": "Monkey Queen",
+      "auction_house": "Forum Auctions",
+      "auction_date": "",
+      "edition": "",
+      "low_estimate": 9000,
+      "high_estimate": 12000,
+      "realised_price": null,
+      "currency": "GBP",
+      "url": "https://www.invaluable.com/auction-lot/banksy-b-1974-monkey-queen-5-c-65ee863fe1",
+      "image_url": "https://image.invaluable.com/housePhotos/Forum-Auctions/54/821054/H20198-L1wIOZMv3dZWB6.jpg",
+      "source": "forum",
       "status": "upcoming",
       "is_original": true
     }
