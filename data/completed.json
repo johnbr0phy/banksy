@@ -1,5 +1,5 @@
 {
-  "last_updated": "2026-10-26T11:55:55Z",
+  "last_updated": "2026-10-27T11:29:33Z",
   "lots": [
     {
       "id": "phillips-ecb3236ca2c5",
@@ -6690,17 +6690,17 @@
       "is_original": true
     },
     {
-      "id": "tateward-7adad4127da3",
-      "print_name": "Estimated at £10,000 - £15,000",
+      "id": "tateward-7b9185e559e1",
+      "print_name": "Estimated at £80,000 - £120,000",
       "auction_house": "Tate Ward",
       "auction_date": "",
       "edition": "",
-      "low_estimate": 10000,
-      "high_estimate": 15000,
-      "realised_price": 12500,
+      "low_estimate": 80000,
+      "high_estimate": 120000,
+      "realised_price": 97500,
       "currency": "GBP",
-      "url": "https://www.tateward.com/auction/lot/161-banksy-british-1974--gangsta-rat-2004/",
-      "image_url": "https://trumanward.goauction.co.uk/stock/23456-0-small.jpg?v=63923261890090",
+      "url": "https://www.tateward.com/auction/lot/165-banksy-british-1974--lenin-on-roller-skates-2003/",
+      "image_url": "https://trumanward.goauction.co.uk/stock/23070-0-small.jpg?v=63922664826357",
       "source": "tateward",
       "status": "completed",
       "is_original": true
