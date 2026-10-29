@@ -1,22 +1,6 @@
 {
-  "last_updated": "2026-10-28T11:54:28Z",
+  "last_updated": "2026-10-29T12:02:22Z",
   "lots": [
-    {
-      "id": "bonhams-inv-fdd1fc71967f",
-      "print_name": "Girl with Balloon",
-      "auction_house": "Bonhams",
-      "auction_date": "",
-      "edition": "",
-      "low_estimate": 40000,
-      "high_estimate": 60000,
-      "realised_price": null,
-      "currency": "EUR",
-      "url": "https://www.invaluable.com/auction-lot/banksy-ne-en-1974-girl-with-balloon-2004-serigrap-38-c-3645506134",
-      "image_url": "https://image.invaluable.com/housePhotos/Bonhams/12/820712/H22141-LrmdcdNFBe3U3q.jpg",
-      "source": "bonhams",
-      "status": "upcoming",
-      "is_original": true
-    },
     {
       "id": "forum-inv-00386707a42f",
       "print_name": "Flying Copper",
