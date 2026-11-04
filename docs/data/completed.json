@@ -1,5 +1,5 @@
 {
-  "last_updated": "2026-11-03T13:19:02Z",
+  "last_updated": "2026-11-04T13:33:05Z",
   "lots": [
     {
       "id": "phillips-ecb3236ca2c5",
@@ -6690,17 +6690,17 @@
       "is_original": true
     },
     {
-      "id": "tateward-f6b61757c692",
-      "print_name": "Estimated at £18,000 - £20,000",
+      "id": "tateward-4acb816966fb",
+      "print_name": "Estimated at £15,000 - £20,000",
       "auction_house": "Tate Ward",
       "auction_date": "",
       "edition": "",
-      "low_estimate": 18000,
+      "low_estimate": 15000,
       "high_estimate": 20000,
-      "realised_price": 22000,
+      "realised_price": 18750,
       "currency": "GBP",
-      "url": "https://www.tateward.com/auction/lot/164-banksy-british-1974--gold-flag-2008/",
-      "image_url": "https://trumanward.goauction.co.uk/stock/23466-0-small.jpg?v=63923517244687",
+      "url": "https://www.tateward.com/auction/lot/162-banksy-british-1974--trolleys-colour-2007/",
+      "image_url": "https://trumanward.goauction.co.uk/stock/23292-0-small.jpg?v=63923949454460",
       "source": "tateward",
       "status": "completed",
       "is_original": true
