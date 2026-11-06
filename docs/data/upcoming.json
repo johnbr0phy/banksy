@@ -1,4 +1,21 @@
 {
-  "last_updated": "2026-11-05T13:47:25Z",
-  "lots": []
+  "last_updated": "2026-11-06T13:31:07Z",
+  "lots": [
+    {
+      "id": "bonhams-inv-6c565170402e",
+      "print_name": "Gangsta Rat",
+      "auction_house": "Bonhams",
+      "auction_date": "",
+      "edition": "",
+      "low_estimate": 80000,
+      "high_estimate": 120000,
+      "realised_price": null,
+      "currency": "USD",
+      "url": "https://www.invaluable.com/auction-lot/banksy-b-1974-gangsta-rat-mint-19-3-4-x-13-7-8-in-237-c-9b9f45ac72",
+      "image_url": "https://image.invaluable.com/housePhotos/Bonhams/89/822089/H22141-LNkr1yyPP5Tgmi.jpg",
+      "source": "bonhams",
+      "status": "upcoming",
+      "is_original": true
+    }
+  ]
 }
