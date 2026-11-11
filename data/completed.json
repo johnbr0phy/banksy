@@ -1,5 +1,5 @@
 {
-  "last_updated": "2026-11-10T14:02:03Z",
+  "last_updated": "2026-11-11T13:15:10Z",
   "lots": [
     {
       "id": "phillips-ecb3236ca2c5",
@@ -6686,38 +6686,6 @@
       "url": "https://www.bonhams.com/auction/16259/lot/43/banksy-british-born-1975-flag-2006/",
       "image_url": "https://images1.bonhams.com/image?src=Images/live/2007-12/11/7589792-1-1.jpg",
       "source": "bonhams",
-      "status": "completed",
-      "is_original": true
-    },
-    {
-      "id": "tateward-4acb816966fb",
-      "print_name": "Estimated at £15,000 - £20,000",
-      "auction_house": "Tate Ward",
-      "auction_date": "",
-      "edition": "",
-      "low_estimate": 15000,
-      "high_estimate": 20000,
-      "realised_price": 18750,
-      "currency": "GBP",
-      "url": "https://www.tateward.com/auction/lot/162-banksy-british-1974--trolleys-colour-2007/",
-      "image_url": "https://trumanward.goauction.co.uk/stock/23292-0-small.jpg?v=63923949454460",
-      "source": "tateward",
-      "status": "completed",
-      "is_original": true
-    },
-    {
-      "id": "tateward-7adad4127da3",
-      "print_name": "Estimated at £10,000 - £15,000",
-      "auction_house": "Tate Ward",
-      "auction_date": "",
-      "edition": "",
-      "low_estimate": 10000,
-      "high_estimate": 15000,
-      "realised_price": 12500,
-      "currency": "GBP",
-      "url": "https://www.tateward.com/auction/lot/161-banksy-british-1974--gangsta-rat-2004/",
-      "image_url": "https://trumanward.goauction.co.uk/stock/23456-0-small.jpg?v=63923261890090",
-      "source": "tateward",
       "status": "completed",
       "is_original": true
     }
