@@ -1,5 +1,5 @@
 {
-  "last_updated": "2026-11-16T14:19:52Z",
+  "last_updated": "2026-11-17T15:13:12Z",
   "lots": [
     {
       "id": "bonhams-inv-6c565170402e",
@@ -14,6 +14,70 @@
       "url": "https://www.invaluable.com/auction-lot/banksy-b-1974-gangsta-rat-mint-19-3-4-x-13-7-8-in-237-c-9b9f45ac72",
       "image_url": "https://image.invaluable.com/housePhotos/Bonhams/89/822089/H22141-LNkr1yyPP5Tgmi.jpg",
       "source": "bonhams",
+      "status": "upcoming",
+      "is_original": true
+    },
+    {
+      "id": "roseberys-inv-47d950afe85c",
+      "print_name": "Monkey Parliament",
+      "auction_house": "Roseberys",
+      "auction_date": "",
+      "edition": "",
+      "low_estimate": 1000,
+      "high_estimate": 1500,
+      "realised_price": null,
+      "currency": "GBP",
+      "url": "https://www.invaluable.com/auction-lot/banksy-british-b-1974-monkey-parliament-2021-368-c-7853128c92",
+      "image_url": "https://image.invaluable.com/housePhotos/Rosebery/32/822832/H0900-LkXjia5q3Gk79c.jpg",
+      "source": "roseberys",
+      "status": "upcoming",
+      "is_original": true
+    },
+    {
+      "id": "roseberys-inv-00cfb9a95052",
+      "print_name": "Girl with Balloon",
+      "auction_house": "Roseberys",
+      "auction_date": "",
+      "edition": "",
+      "low_estimate": 60000,
+      "high_estimate": 80000,
+      "realised_price": null,
+      "currency": "GBP",
+      "url": "https://www.invaluable.com/auction-lot/banksy-british-b-1974-girl-with-balloon-2004-381-c-fdd1c94378",
+      "image_url": "https://image.invaluable.com/static/noimage_noborder.png",
+      "source": "roseberys",
+      "status": "upcoming",
+      "is_original": true
+    },
+    {
+      "id": "roseberys-inv-1b6adf51d1fb",
+      "print_name": "Kate Moss",
+      "auction_house": "Roseberys",
+      "auction_date": "",
+      "edition": "",
+      "low_estimate": 700,
+      "high_estimate": 1000,
+      "realised_price": null,
+      "currency": "GBP",
+      "url": "https://www.invaluable.com/auction-lot/banksy-british-b-1974-save-or-delete-banksy-vs-br-383-c-8b1bbab539",
+      "image_url": "https://image.invaluable.com/housePhotos/Rosebery/32/822832/H0900-LkrVaQPXmgZNQ3.jpg",
+      "source": "roseberys",
+      "status": "upcoming",
+      "is_original": true
+    },
+    {
+      "id": "roseberys-inv-8dd157b0527b",
+      "print_name": "Crude Oil",
+      "auction_house": "Roseberys",
+      "auction_date": "",
+      "edition": "",
+      "low_estimate": 300,
+      "high_estimate": 500,
+      "realised_price": null,
+      "currency": "GBP",
+      "url": "https://www.invaluable.com/auction-lot/banksy-british-b-1974-collection-of-unframed-work-392-c-5e1cd32017",
+      "image_url": "https://image.invaluable.com/housePhotos/Rosebery/32/822832/H0900-LMaWW7qauahbF6.jpg",
+      "source": "roseberys",
       "status": "upcoming",
       "is_original": true
     }
