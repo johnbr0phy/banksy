@@ -1,22 +1,6 @@
 {
-  "last_updated": "2026-11-19T14:58:52Z",
+  "last_updated": "2026-11-20T14:40:12Z",
   "lots": [
-    {
-      "id": "bonhams-inv-6c565170402e",
-      "print_name": "Gangsta Rat",
-      "auction_house": "Bonhams",
-      "auction_date": "",
-      "edition": "",
-      "low_estimate": 80000,
-      "high_estimate": 120000,
-      "realised_price": null,
-      "currency": "USD",
-      "url": "https://www.invaluable.com/auction-lot/banksy-b-1974-gangsta-rat-mint-19-3-4-x-13-7-8-in-237-c-9b9f45ac72",
-      "image_url": "https://image.invaluable.com/housePhotos/Bonhams/89/822089/H22141-LNkr1yyPP5Tgmi.jpg",
-      "source": "bonhams",
-      "status": "upcoming",
-      "is_original": true
-    },
     {
       "id": "roseberys-inv-47d950afe85c",
       "print_name": "Monkey Parliament",
@@ -44,7 +28,7 @@
       "realised_price": null,
       "currency": "GBP",
       "url": "https://www.invaluable.com/auction-lot/banksy-british-b-1974-girl-with-balloon-2004-381-c-fdd1c94378",
-      "image_url": "https://image.invaluable.com/static/noimage_noborder.png",
+      "image_url": "https://image.invaluable.com/housePhotos/Rosebery/32/822832/H0900-LcoTh88s4VGM7K.jpg",
       "source": "roseberys",
       "status": "upcoming",
       "is_original": true
