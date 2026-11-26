@@ -1,5 +1,5 @@
 {
-  "last_updated": "2026-11-25T16:30:36Z",
+  "last_updated": "2026-11-26T16:05:02Z",
   "lots": [
     {
       "id": "roseberys-inv-47d950afe85c",
@@ -270,6 +270,38 @@
       "url": "https://www.invaluable.com/auction-lot/banksy-british-1974-sale-ends-today-2006-185-c-10178db52a",
       "image_url": "https://image.invaluable.com/housePhotos/TrumanWard/63/823263/H21746-LbUeX9ZQNLOs1w.jpg",
       "source": "tateward",
+      "status": "upcoming",
+      "is_original": true
+    },
+    {
+      "id": "forum-inv-d7514cc0f603",
+      "print_name": "Toxic Mary",
+      "auction_house": "Forum Auctions",
+      "auction_date": "",
+      "edition": "",
+      "low_estimate": 16000,
+      "high_estimate": 18000,
+      "realised_price": null,
+      "currency": "GBP",
+      "url": "https://www.invaluable.com/auction-lot/banksy-b-1974-toxic-mary-signed-81a-c-c024811fc0",
+      "image_url": "https://image.invaluable.com/housePhotos/Forum-Auctions/87/823187/H20198-Lx1daJ3Fqckack.jpg",
+      "source": "forum",
+      "status": "upcoming",
+      "is_original": true
+    },
+    {
+      "id": "forum-inv-4fff7716daa7",
+      "print_name": "Wall and Piece, first edition, 2005",
+      "auction_house": "Forum Auctions",
+      "auction_date": "",
+      "edition": "",
+      "low_estimate": 200,
+      "high_estimate": 300,
+      "realised_price": null,
+      "currency": "GBP",
+      "url": "https://www.invaluable.com/auction-lot/banksy-wall-and-piece-first-edition-2005-124-c-69564b1b6a",
+      "image_url": "https://image.invaluable.com/housePhotos/Forum-Auctions/85/823185/H20198-LXIxUSwEVO3s0W.jpg",
+      "source": "forum",
       "status": "upcoming",
       "is_original": true
     }
