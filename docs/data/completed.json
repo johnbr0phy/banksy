@@ -1,5 +1,5 @@
 {
-  "last_updated": "2026-11-26T16:05:02Z",
+  "last_updated": "2026-11-27T15:53:17Z",
   "lots": [
     {
       "id": "phillips-ecb3236ca2c5",
@@ -6686,22 +6686,6 @@
       "url": "https://www.bonhams.com/auction/16259/lot/43/banksy-british-born-1975-flag-2006/",
       "image_url": "https://images1.bonhams.com/image?src=Images/live/2007-12/11/7589792-1-1.jpg",
       "source": "bonhams",
-      "status": "completed",
-      "is_original": true
-    },
-    {
-      "id": "tateward-7b9185e559e1",
-      "print_name": "Estimated at £80,000 - £120,000",
-      "auction_house": "Tate Ward",
-      "auction_date": "",
-      "edition": "",
-      "low_estimate": 80000,
-      "high_estimate": 120000,
-      "realised_price": 97500,
-      "currency": "GBP",
-      "url": "https://www.tateward.com/auction/lot/165-banksy-british-1974--lenin-on-roller-skates-2003/",
-      "image_url": "https://trumanward.goauction.co.uk/stock/23070-0-small.jpg?v=63922664826357",
-      "source": "tateward",
       "status": "completed",
       "is_original": true
     },
